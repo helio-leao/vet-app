@@ -3,17 +3,22 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import MonitoringScreen from './screens/MonitoringScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './navigation/AppNavigator';
+import { AuthProvider } from './contexts/AuthProvider';
 
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <MonitoringScreen />
+      <AuthProvider>
+        <NavigationContainer>
+          <AppNavigator />
+        </NavigationContainer>
+      </AuthProvider>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   screenContainer: {

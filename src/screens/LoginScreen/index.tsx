@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,9 +8,21 @@ import {
   Image,
 } from 'react-native';
 import googleIcon from '../../assets/icons/google-icon.png';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 
 function LoginScreen(): React.JSX.Element {
+  const { login, user } = useContext(AuthContext);
+  const [loginText, setLoginText] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  function handleEnterPressed() {
+    // todo: implement login
+    login({ id: '1', email: loginText });
+  }
+
+
   return (
     <View style={styles.screenContainer}>
 
@@ -23,13 +35,13 @@ function LoginScreen(): React.JSX.Element {
           <Text style={styles.text}>
             Login
           </Text>
-          <TextInput style={styles.textInput} />
+          <TextInput style={styles.textInput} onChangeText={setLoginText} />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.text}>
             Senha
           </Text>
-          <TextInput style={styles.textInput} secureTextEntry />
+          <TextInput style={styles.textInput} secureTextEntry onChangeText={setPassword} />
         </View>
       </View>
 
@@ -39,7 +51,7 @@ function LoginScreen(): React.JSX.Element {
             Esqueci minha senha
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleEnterPressed}>
           <Text style={[styles.text, {color: '#fff'}]}>
             Entrar
           </Text>

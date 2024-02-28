@@ -12,7 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import patientsMocks from '../../mocks/patients.json';
 
 
-function MonitoringScreen(): React.JSX.Element {
+function DRCMonitorScreen(): React.JSX.Element {
   return (
     <View style={styles.screenContainer}>
 
@@ -29,7 +29,6 @@ function MonitoringScreen(): React.JSX.Element {
 
 
       <View style={styles.pacientListContainer}>
-
         <FlatList
           contentContainerStyle={{padding: 10, gap: 10}}
           data={patientsMocks}
@@ -59,8 +58,7 @@ function MonitoringScreen(): React.JSX.Element {
               </View>
             </TouchableOpacity>
           )}
-        />
-        
+        />        
       </View>
 
     </View>
@@ -105,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MonitoringScreen;
+export default DRCMonitorScreen;
