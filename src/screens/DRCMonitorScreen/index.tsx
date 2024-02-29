@@ -2,9 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   TextInput,
-  Image,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
@@ -12,6 +10,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import patientsMocks from '../../mocks/patients.json';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '../../navigation/GenericStack';
+import PatientCard from '../../components/PatientCard';
 
 
 function DRCMonitorScreen(): React.JSX.Element {
@@ -43,30 +42,10 @@ function DRCMonitorScreen(): React.JSX.Element {
           contentContainerStyle={{padding: 10, gap: 10}}
           data={patientsMocks}
           renderItem={({item: patient}) => (
-            <TouchableOpacity style={styles.pacientContainer} onPress={() => handlePatientCardPress(patient.id)}>
-              <Image
-                style={styles.pacientPhoto}
-                source={{uri: patient.picture}}
-              />
-              <View style={{flex: 1}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                  <Text style={[styles.text, {fontSize: 24, fontWeight: '800'}]}>
-                    {patient.name}
-                  </Text>
-                  <Text style={{fontSize: 12, color: '#0aa'}}>
-                    Última consulta: {patient.latestAppointment}
-                  </Text>
-                </View>
-
-
-                <Text style={styles.text}>
-                  {patient.healthDescription}
-                </Text>
-                <Text style={styles.text}>
-                  Tutor(a): {patient.tutor.name}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <PatientCard
+              patient={patient}
+              onPress={() => handlePatientCardPress(patient.id)}
+            />
           )}
         />        
       </View>
