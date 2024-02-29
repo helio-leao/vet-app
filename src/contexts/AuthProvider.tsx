@@ -30,7 +30,6 @@ export function AuthProvider({children}: AuthProviderProps) {
   const [user, setUser] = useState<User|null>(null);
 
   function login(userData: User) {
-    console.log(userData)
     setUser(userData);
   }
 

@@ -10,9 +10,19 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import patientsMocks from '../../mocks/patients.json';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '../../navigation/GenericStack';
 
 
 function DRCMonitorScreen(): React.JSX.Element {
+  const navigation = useNavigation<StackNavigationProp>();
+
+
+  function handlePatientCardPress(id: string) {
+    navigation.navigate('PatientStatusScreen', { id });
+  }
+
+
   return (
     <View style={styles.screenContainer}>
 
@@ -33,7 +43,7 @@ function DRCMonitorScreen(): React.JSX.Element {
           contentContainerStyle={{padding: 10, gap: 10}}
           data={patientsMocks}
           renderItem={({item: patient}) => (
-            <TouchableOpacity style={styles.pacientContainer}>
+            <TouchableOpacity style={styles.pacientContainer} onPress={() => handlePatientCardPress(patient.id)}>
               <Image
                 style={styles.pacientPhoto}
                 source={{uri: patient.picture}}
