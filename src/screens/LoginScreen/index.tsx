@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import googleIcon from '../../assets/icons/google-icon.png';
+import googleLogo from '../../assets/images/google-logo.png';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 
@@ -65,7 +65,7 @@ function LoginScreen(): React.JSX.Element {
         <TouchableOpacity>
           <Image
             style={styles.icon}
-            source={googleIcon}
+            source={googleLogo}
           />
         </TouchableOpacity>
       </View>

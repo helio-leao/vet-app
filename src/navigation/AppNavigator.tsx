@@ -8,6 +8,7 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import GenericStack from './GenericStack';
 import { AuthContext } from '../contexts/AuthProvider';
 import LoginScreen from '../screens/LoginScreen';
+import PatientExamScreen from '../screens/PatientExamScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -40,18 +41,16 @@ export default function AppNavigator() {
           tabBarIcon: ({color, size}) => (            
             <Ionicons name={"home"} size={size} color={color} />
           ),
-          tabBarLabel: 'Home',
         }}
       />
       
       <Tab.Screen
         name='GraphTab'
-        component={GenericStack}
+        component={PatientExamScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Foundation name="graph-bar" size={size} color={color} />
           ),
-          tabBarLabel: 'Buscar',
         }}
       />
 
@@ -62,7 +61,6 @@ export default function AppNavigator() {
           tabBarIcon: ({color, size}) => (
             <FontAwesome name="plus" size={size} color={color} />
           ),
-          tabBarLabel: 'Buscar',
         }}
       />
 
@@ -73,7 +71,6 @@ export default function AppNavigator() {
           tabBarIcon: ({color, size}) => (
             <FontAwesome6 name="list-check" size={size} color={color} />
           ),
-          tabBarLabel: 'Buscar',
         }}
       />
 
@@ -84,7 +81,6 @@ export default function AppNavigator() {
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name="user-md" size={size} color={color} />
           ),
-          tabBarLabel: 'Buscar',
         }}
       />
 
