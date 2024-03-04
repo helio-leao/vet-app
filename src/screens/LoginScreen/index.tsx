@@ -30,7 +30,8 @@ function LoginScreen(): React.JSX.Element {
         Acompanhamento DCVet
       </Text>
 
-      <View style={styles.inputListContainer}>
+      {/* MID SECTION */}
+      <View style={styles.inputListContainer}>        
         <View style={styles.inputContainer}>
           <Text style={styles.text}>
             Login
@@ -43,43 +44,48 @@ function LoginScreen(): React.JSX.Element {
           </Text>
           <TextInput style={styles.textInput} secureTextEntry onChangeText={setPassword} />
         </View>
-      </View>
 
-      <View style={styles.loginButtonsContainer}>
-        <TouchableOpacity>
-          <Text style={[styles.text, {color: '#000'}]}>
-            Esqueci minha senha
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleEnterPressed}>
-          <Text style={[styles.text, {color: '#fff'}]}>
-            Entrar
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.loginButtonsContainer}>
+          <TouchableOpacity>
+            <Text style={[styles.text, {color: '#000'}]}>
+              Esqueci minha senha
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleEnterPressed}>
+            <Text style={[styles.text, {color: '#fff'}]}>
+              Entrar
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
+      {/* END MID SECTION */}
 
-      <View style={[styles.centralizedContainer, {marginBottom: 30}]}>
-        <Text style={styles.text}>
-          Logar com
-        </Text>
-        <TouchableOpacity>
-          <Image
-            style={styles.icon}
-            source={googleLogo}
-          />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.centralizedContainer}>
-        <Text style={styles.text}>
-          Ainda não tem uma conta?
-        </Text>
-        <TouchableOpacity>
-          <Text style={[styles.text, {color: '#000', fontWeight: '800'}]}>
-            Criar conta
+      {/* LOWER SECTION */}
+      <View>
+        <View style={[styles.centralizedContainer, {marginBottom: 30}]}>
+          <Text style={styles.text}>
+            Logar com
           </Text>
-        </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              style={styles.icon}
+              source={googleLogo}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.centralizedContainer}>
+          <Text style={styles.text}>
+            Ainda não tem uma conta?
+          </Text>
+          <TouchableOpacity>
+            <Text style={[styles.text, {color: '#000', fontWeight: '800'}]}>
+              Criar conta
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
+      {/* END LOWER SECTION */}
 
     </View>
   );
@@ -89,16 +95,15 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     padding: 40,
-    color: '#666',
+    backgroundColor: '#fff',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 36,
-    marginBottom: 100,
     color: '#0aa',
   },
   inputListContainer: {
     gap: 16,
-    marginBottom: 24,
   },
   inputContainer: {
     gap: 6,
@@ -119,7 +124,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 70,
   },
   button: {
     backgroundColor: '#000',

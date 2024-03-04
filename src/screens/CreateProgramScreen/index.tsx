@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   View,
@@ -8,13 +8,14 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { PatientStatusScreenProp } from '../../navigation/GenericStack';
+import { PatientStatusScreenProp, StackNavigationProp } from '../../navigation/HomeStack';
 import patientsMocks from '../../mocks/patients.json';
 import { Patient } from '../../types';
 import PatientCard from '../../components/PatientCard';
 
 
-function PatientStatusScreen(): React.JSX.Element {
+function CreateProgramScreen(): React.JSX.Element {
+  const navigation = useNavigation<StackNavigationProp>();
   const route = useRoute<PatientStatusScreenProp>();
   const [patient, setPatient] = useState<Patient>();
   const [isEnabled, setIsEnabled] = useState(false);
@@ -39,6 +40,7 @@ function PatientStatusScreen(): React.JSX.Element {
 
   return (
     <View style={styles.screenContainer}>
+
       <PatientCard patient={patient} />
 
       <View style={styles.contentContainer}>
@@ -59,17 +61,13 @@ function PatientStatusScreen(): React.JSX.Element {
             </View>
 
             <View>
-              <Text style={{
-                fontSize: 20,
-                fontWeight: '800',
-                marginBottom: 10,
-              }}>
+              <Text style={styles.title}>
                 Hematologia
               </Text>
 
               <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
                 <SwitchRow
-                  text={'Aferição de pressão arterial'}
+                  text={'Hemograma'}
                   value={isEnabled}
                   onValueChange={setIsEnabled}
                 />
@@ -77,11 +75,7 @@ function PatientStatusScreen(): React.JSX.Element {
             </View>
 
             <View>
-              <Text style={{
-                fontSize: 20,
-                fontWeight: '800',
-                marginBottom: 10,
-              }}>
+              <Text style={styles.title}>
                 Bioquímicos
               </Text>
 
@@ -109,18 +103,22 @@ function PatientStatusScreen(): React.JSX.Element {
               </View>
             </View>
 
+            <View style={{paddingRight: 10}}>
+              <SwitchRow
+                text={'Hemogasometria'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+
             <View>
-              <Text style={{
-                fontSize: 20,
-                fontWeight: '800',
-                marginBottom: 10,
-              }}>
-                Hormônios
+              <Text style={styles.title}>
+                Urina
               </Text>
 
               <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
                 <SwitchRow
-                  text={'PTH'}
+                  text={'Sumário'}
                   value={isEnabled}
                   onValueChange={setIsEnabled}
                 />
@@ -133,11 +131,26 @@ function PatientStatusScreen(): React.JSX.Element {
             </View>
 
             <View>
-              <Text style={{
-                fontSize: 20,
-                fontWeight: '800',
-                marginBottom: 10,
-              }}>
+              <Text style={styles.title}>
+                Hormônios
+              </Text>
+
+              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+                <SwitchRow
+                  text={'PTH'}
+                  value={isEnabled}
+                  onValueChange={setIsEnabled}
+                />
+                <SwitchRow
+                  text={'TSH'}
+                  value={isEnabled}
+                  onValueChange={setIsEnabled}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.title}>
                 Eletrólitos
               </Text>
 
@@ -181,11 +194,7 @@ function PatientStatusScreen(): React.JSX.Element {
             </View>
             
             <View>
-              <Text style={{
-                fontSize: 20,
-                fontWeight: '800',
-                marginBottom: 10,
-              }}>
+              <Text style={styles.title}>
                 Imagem
               </Text>
 
@@ -204,12 +213,18 @@ function PatientStatusScreen(): React.JSX.Element {
             </View>
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <TouchableOpacity style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}>
+              <TouchableOpacity
+                style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+                onPress={() => navigation.navigate('PatientMonitoringScreen', {id: route.params.id})}
+              >
                 <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
                   Cancelar
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{backgroundColor: '#0ab', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}>
+              <TouchableOpacity
+                style={{backgroundColor: '#0ab', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+                onPress={() => navigation.navigate('PatientMonitoringScreen', {id: route.params.id})}
+              >
                 <Text style={[styles.text, {color: '#fff', fontWeight: '600'}]}>
                   Confirmar
                 </Text>
@@ -262,10 +277,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8F8',
     borderRadius: 10,
   },
+  title: {
+    fontSize: 20,
+    fontWeight: '800',
+    marginBottom: 10,
+    color: '#666',
+  },
   text: {
     fontSize: 16,
     color: '#666',
   },
 });
 
-export default PatientStatusScreen;
+export default CreateProgramScreen;

@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Foundation from 'react-native-vector-icons/Foundation';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import GenericStack from './GenericStack';
+import HomeStack from './HomeStack';
 import { AuthContext } from '../contexts/AuthProvider';
 import LoginScreen from '../screens/LoginScreen';
-import PatientExamScreen from '../screens/PatientExamScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,27 +34,17 @@ export default function AppNavigator() {
     >
       <Tab.Screen
         name='HomeTab'
-        component={GenericStack}
+        component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (            
             <Ionicons name={"home"} size={size} color={color} />
           ),
         }}
       />
-      
-      <Tab.Screen
-        name='GraphTab'
-        component={PatientExamScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Foundation name="graph-bar" size={size} color={color} />
-          ),
-        }}
-      />
 
       <Tab.Screen
         name='AddTab'
-        component={GenericStack}
+        component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome name="plus" size={size} color={color} />
@@ -66,7 +54,7 @@ export default function AppNavigator() {
 
       <Tab.Screen
         name='CheckTab'
-        component={GenericStack}
+        component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome6 name="list-check" size={size} color={color} />
@@ -76,7 +64,7 @@ export default function AppNavigator() {
 
       <Tab.Screen
         name='ProfileTab'
-        component={GenericStack}
+        component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name="user-md" size={size} color={color} />

@@ -9,16 +9,16 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import patientsMocks from '../../mocks/patients.json';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '../../navigation/GenericStack';
+import { StackNavigationProp } from '../../navigation/HomeStack';
 import PatientCard from '../../components/PatientCard';
 
 
-function DRCMonitorScreen(): React.JSX.Element {
+function PatientSearchScreen(): React.JSX.Element {
   const navigation = useNavigation<StackNavigationProp>();
 
 
   function handlePatientCardPress(id: string) {
-    navigation.navigate('PatientStatusScreen', { id });
+    navigation.navigate('CreateProgramScreen', { id });
   }
 
 
@@ -26,7 +26,11 @@ function DRCMonitorScreen(): React.JSX.Element {
     <View style={styles.screenContainer}>
 
       <View>
-        <TextInput style={styles.textInput} placeholder='Buscar Paciente' />
+        <TextInput
+          style={styles.textInput}
+          placeholder='Buscar Paciente'
+          placeholderTextColor={'#666'}
+        />
         <TouchableOpacity style={{position: 'absolute', top: 8, right: 8}}>
           <FontAwesome
             name="search"
@@ -61,6 +65,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderColor: '#666',
+    backgroundColor: '#fff',
     borderRadius: 6,
     borderWidth: 1,
     paddingVertical: 6,
@@ -92,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DRCMonitorScreen;
+export default PatientSearchScreen;

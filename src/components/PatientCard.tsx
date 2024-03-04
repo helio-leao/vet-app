@@ -48,9 +48,9 @@ function CardContent({patient}: CardContentProps) {
           <Text style={[styles.text, {fontSize: 24, fontWeight: '800'}]}>
             {patient.name}
           </Text>
-          <Text style={{fontSize: 12, color: '#0aa'}}>
+          {/* <Text style={{fontSize: 12, color: '#0aa'}}>
             Última consulta: {patient.latestAppointment}
-          </Text>
+          </Text> */}
         </View>
 
         <Text style={styles.text}>
