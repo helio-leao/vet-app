@@ -14,10 +14,6 @@ type PatientCardProps = {
   onPress?: () => void,
 }
 
-type CardContentProps = {
-  patient: Patient,
-}
-
 
 function PatientCard({patient, onPress}: PatientCardProps): React.JSX.Element {
   if(!onPress) {
@@ -35,7 +31,7 @@ function PatientCard({patient, onPress}: PatientCardProps): React.JSX.Element {
   );
 }
 
-function CardContent({patient}: CardContentProps) {
+function CardContent({patient}: {patient: Patient}) {
   return(
     <>
       <Image

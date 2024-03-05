@@ -4,15 +4,15 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Image,
   ScrollView,
 } from 'react-native';
 import patientsMocks from '../../mocks/patients.json';
+import examsMocks from '../../mocks/exams.json';
 import { Patient } from '../../types';
 import PatientCard from '../../components/PatientCard';
-import graphPlaceholder from '../../assets/images/graph-placeholder.png';
 import { PatientMonitoringScreenProp } from '../../navigation/HomeStack';
 import { useRoute } from '@react-navigation/native';
+import ChartCard from './components/ChartCard';
 
 
 function PatientMonitoringScreen(): React.JSX.Element {
@@ -42,30 +42,37 @@ function PatientMonitoringScreen(): React.JSX.Element {
       <ScrollView>
         <View style={{paddingHorizontal: 10, paddingVertical: 20}}>
 
-          <PatientCard patient={patient} />
+          <PatientCard patient={patient} />            
 
-          {/* GRAPHS */}
-          <View style={{marginTop: 20, gap: 20, paddingHorizontal: 20}}>
-            <View style={styles.graphCard}>
-              <Text style={[styles.text, {marginBottom: 10}]}>
-                Fósforo
-              </Text>
-              <Image
-                source={graphPlaceholder}
-                style={{height: 100, aspectRatio: 1, alignSelf: 'center', opacity: 0.3}}
-              />
-            </View>
-            <View style={styles.graphCard}>
-              <Text style={[styles.text, {marginBottom: 10}]}>
-                Fósforo
-              </Text>
-              <Image
-                source={graphPlaceholder}
-                style={{height: 100, aspectRatio: 1, alignSelf: 'center', opacity: 0.3}}
-              />
-            </View>
+          {/* CHARTS */}
+          <View style={{marginTop: 20, gap: 20}}>
+            <ChartCard
+              text='Fósforo(mg/dL)'
+              exams={examsMocks.filter(exam =>
+                exam.patientId === patient.id && exam.type.includes('Fósforo(mg/dL)'))}
+            />
+            <ChartCard
+              text='Cálcio ionizado(mg/dL)'
+              exams={examsMocks.filter(exam =>
+                exam.patientId === patient.id && exam.type.includes('Cálcio ionizado(mg/dL)'))}
+            />
+            <ChartCard
+              text='Pressão arterial(mmHg)'
+              exams={examsMocks.filter(exam =>
+                exam.patientId === patient.id && exam.type.includes('Pressão arterial(mmHg)'))}
+            />
+            <ChartCard
+              text='Ureia(mg/dL)'
+              exams={examsMocks.filter(exam =>
+                exam.patientId === patient.id && exam.type.includes('Ureia(mg/dL)'))}
+            />
+            <ChartCard
+              text='Creatinina'
+              exams={examsMocks.filter(exam =>
+                exam.patientId === patient.id && exam.type.includes('Creatinina'))}
+            />
           </View>
-          {/* END GRAPHS */}
+          {/* END CHARTS */}
 
           {/* BUTTONS */}
           <View style={{alignSelf: 'center', marginTop: 10, gap: 10}}>
@@ -95,18 +102,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: '#999',
-  },
-  graphCard: {
-    paddingHorizontal: 10,
-    paddingBottom: 30,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderBottomEndRadius: 10,
-    borderBottomStartRadius: 10,
-    borderLeftColor: '#999',
-    borderBottomColor: '#999',
-    borderRightColor: '#999',
   },
 });
 

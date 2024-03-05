@@ -86,6 +86,11 @@ function CreateProgramScreen(): React.JSX.Element {
                   onValueChange={setIsEnabled}
                 />
                 <SwitchRow
+                  text={'Globulinas'}
+                  value={isEnabled}
+                  onValueChange={setIsEnabled}
+                />
+                <SwitchRow
                   text={'Creatinina'}
                   value={isEnabled}
                   onValueChange={setIsEnabled}
@@ -124,25 +129,6 @@ function CreateProgramScreen(): React.JSX.Element {
                 />
                 <SwitchRow
                   text={'RPCU'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text style={styles.title}>
-                Hormônios
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'PTH'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'TSH'}
                   value={isEnabled}
                   onValueChange={setIsEnabled}
                 />
@@ -206,6 +192,25 @@ function CreateProgramScreen(): React.JSX.Element {
                 />
                 <SwitchRow
                   text={'Raio X'}
+                  value={isEnabled}
+                  onValueChange={setIsEnabled}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.title}>
+                Hormônios
+              </Text>
+
+              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+                <SwitchRow
+                  text={'PTH'}
+                  value={isEnabled}
+                  onValueChange={setIsEnabled}
+                />
+                <SwitchRow
+                  text={'TSH'}
                   value={isEnabled}
                   onValueChange={setIsEnabled}
                 />
