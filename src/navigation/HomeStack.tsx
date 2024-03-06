@@ -3,7 +3,9 @@ import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-na
 import PatientSearchScreen from '../screens/PatientSearchScreen';
 import CreateProgramScreen from '../screens/CreateProgramScreen';
 import { RouteProp } from '@react-navigation/native';
+import Octicons from 'react-native-vector-icons/Octicons';
 import PatientMonitoringScreen from '../screens/PatientMonitoringScreen';
+import { TouchableOpacity } from 'react-native';
 
 
 export type StackParamList = {
@@ -24,7 +26,17 @@ const Stack = createNativeStackNavigator();
 export default function HomeStack() {
   return (
     <Stack.Navigator
-      screenOptions={{headerStyle: {backgroundColor: '#0ab'}, headerTintColor: '#fff'}}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0ab',
+        }, 
+        headerTintColor: '#fff',
+        headerRight: () => (
+          <TouchableOpacity>
+            <Octicons name="bell-fill" size={22} color="#fff" />
+          </TouchableOpacity>
+        )
+      }}
     >
       <Stack.Screen
         name={'PatientSearchScreen'}

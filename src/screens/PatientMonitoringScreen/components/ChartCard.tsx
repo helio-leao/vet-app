@@ -12,19 +12,31 @@ import { Exam } from '../../../types';
 
 type ChartCardProps = {
   exams: Exam[],
-  text: string,
+  type: string,
+  yMinGridValue: number,
+  yMaxGridValue: number,
 }
 
 
-function ChartCard({exams, text}: ChartCardProps): React.JSX.Element {
+function ChartCard({
+  exams, 
+  type,
+  yMinGridValue,
+  yMaxGridValue,
+}: ChartCardProps): React.JSX.Element {
+
   return (
     <View style={styles.chartCard}>              
       <Text style={[styles.text, {marginBottom: 10, marginLeft: 10}]}>
-        {text}
+        {type}
       </Text>
 
       {exams.length > 1 ? (
-        <Chart exams={exams} />
+        <Chart
+          exams={exams} 
+          yMinGridValue={yMinGridValue}
+          yMaxGridValue={yMaxGridValue}
+        />
       ) : (
         <Image
           source={chartPlaceholder}
@@ -35,25 +47,32 @@ function ChartCard({exams, text}: ChartCardProps): React.JSX.Element {
   );
 }
 
-function Chart({exams}: {exams: Exam[]}) {
+function Chart({
+  exams, 
+  yMinGridValue, 
+  yMaxGridValue,
+}: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
+
   const data = exams.map(exam => exam.result);
   const labels = exams.map(exam => exam.date);
 
   return(
     <View style={{ marginHorizontal: 20 }}>
-      <View style={{ height: 180, flexDirection: 'row' }}>
+      <View style={{ height: 200, flexDirection: 'row' }}>
         <YAxis
-          data={data}
+          data={[yMinGridValue, yMaxGridValue]}
           contentInset={{ top: 20, bottom: 20 }}
-          formatLabel={(value: any, index: number) => value}
+          formatLabel={(value: number, index: number) => value}
           svg={{
             fill: 'grey',
             fontSize: 14,
           }}
-          numberOfTicks={3}
+          numberOfTicks={8}
         />
         <LineChart
           style={{ flex: 1, marginLeft: 16 }}
+          gridMin={yMinGridValue}
+          gridMax={yMaxGridValue}
           data={data}
           svg={{ stroke: '#0ab', strokeWidth: 2 }}
           contentInset={{ top: 20, bottom: 20 }}
@@ -64,7 +83,7 @@ function Chart({exams}: {exams: Exam[]}) {
       <XAxis
         style={{ marginTop: 5 }}
         data={labels}
-        formatLabel={(value: any, index: number) => labels[index]}
+        formatLabel={(value: number, index: number) => labels[index]}
         contentInset={{ left: 50, right: 20 }}
         svg={{ fontSize: 14, fill: 'grey' }}
       />

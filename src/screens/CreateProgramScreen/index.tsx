@@ -43,202 +43,199 @@ function CreateProgramScreen(): React.JSX.Element {
 
       <PatientCard patient={patient} />
 
-      <View style={styles.contentContainer}>
-        <ScrollView>
-          <View style={{padding: 10, gap: 10}}>
+      <ScrollView style={styles.contentContainer}>
+        <View style={{padding: 10, gap: 10}}>
 
-            <View style={{gap: 10, paddingRight: 10}}>
-              <SwitchRow
-                text={'Aferição de pressão arterial'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
-              />
-              <SwitchRow
-                text={'Escore corporal'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
-              />
-            </View>
-
-            <View>
-              <Text style={styles.title}>
-                Hematologia
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'Hemograma'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text style={styles.title}>
-                Bioquímicos
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'Albumina'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Globulinas'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Creatinina'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Ureia'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'SDMA'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-
-            <View style={{paddingRight: 10}}>
-              <SwitchRow
-                text={'Hemogasometria'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
-              />
-            </View>
-
-            <View>
-              <Text style={styles.title}>
-                Urina
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'Sumário'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'RPCU'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text style={styles.title}>
-                Eletrólitos
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'Cálcio ionizado'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Cálcio total'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Fósforo'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Sódio'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Potássio'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Cloreto'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Magnésio'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-            
-            <View>
-              <Text style={styles.title}>
-                Imagem
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'Ultrassonografia abdominal'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'Raio X'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text style={styles.title}>
-                Hormônios
-              </Text>
-
-              <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
-                <SwitchRow
-                  text={'PTH'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-                <SwitchRow
-                  text={'TSH'}
-                  value={isEnabled}
-                  onValueChange={setIsEnabled}
-                />
-              </View>
-            </View>
-
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <TouchableOpacity
-                style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
-                onPress={() => navigation.navigate('PatientMonitoringScreen', {id: route.params.id})}
-              >
-                <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
-                  Cancelar
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{backgroundColor: '#0ab', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
-                onPress={() => navigation.navigate('PatientMonitoringScreen', {id: route.params.id})}
-              >
-                <Text style={[styles.text, {color: '#fff', fontWeight: '600'}]}>
-                  Confirmar
-                </Text>
-              </TouchableOpacity>
-            </View>
-
+          <View style={{gap: 10, paddingRight: 10}}>
+            <SwitchRow
+              text={'Aferição de pressão arterial'}
+              value={isEnabled}
+              onValueChange={setIsEnabled}
+            />
+            <SwitchRow
+              text={'Escore corporal'}
+              value={isEnabled}
+              onValueChange={setIsEnabled}
+            />
           </View>
-        </ScrollView>
-      </View>
+
+          <View>
+            <Text style={styles.title}>
+              Hematologia
+            </Text>
+
+            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+              <SwitchRow
+                text={'Hemograma'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+          </View>
+
+          <View>
+            <Text style={styles.title}>
+              Bioquímicos
+            </Text>
+
+            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+              <SwitchRow
+                text={'Albumina'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Globulinas'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Creatinina'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Ureia'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'SDMA'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+          </View>
+
+          <View style={{paddingRight: 10}}>
+            <SwitchRow
+              text={'Hemogasometria'}
+              value={isEnabled}
+              onValueChange={setIsEnabled}
+            />
+          </View>
+
+          <View>
+            <Text style={styles.title}>
+              Urina
+            </Text>
+
+            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+              <SwitchRow
+                text={'Sumário'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'RPCU'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+          </View>
+
+          <View>
+            <Text style={styles.title}>
+              Eletrólitos
+            </Text>
+
+            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+              <SwitchRow
+                text={'Cálcio ionizado'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Cálcio total'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Fósforo'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Sódio'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Potássio'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Cloreto'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Magnésio'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+          </View>
+          
+          <View>
+            <Text style={styles.title}>
+              Imagem
+            </Text>
+
+            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+              <SwitchRow
+                text={'Ultrassonografia abdominal'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'Raio X'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+          </View>
+
+          <View>
+            <Text style={styles.title}>
+              Hormônios
+            </Text>
+
+            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
+              <SwitchRow
+                text={'PTH'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+              <SwitchRow
+                text={'TSH'}
+                value={isEnabled}
+                onValueChange={setIsEnabled}
+              />
+            </View>
+          </View>
+
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <TouchableOpacity
+              style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+            >
+              <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
+                Cancelar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{backgroundColor: '#0ab', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+              onPress={() => navigation.navigate('PatientMonitoringScreen', {id: route.params.id})}
+            >
+              <Text style={[styles.text, {color: '#fff', fontWeight: '600'}]}>
+                Confirmar
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+        </View>
+      </ScrollView>
 
     </View>
   );
@@ -277,7 +274,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   contentContainer: {
-    marginTop: 20,
+    marginTop: 10,
     flex: 1,
     backgroundColor: '#F8F8F8',
     borderRadius: 10,

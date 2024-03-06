@@ -39,37 +39,49 @@ function PatientMonitoringScreen(): React.JSX.Element {
 
   return (
     <View style={styles.screenContainer}>
-      <ScrollView>
-        <View style={{paddingHorizontal: 10, paddingVertical: 20}}>
+      <View style={{paddingHorizontal: 16, paddingTop: 16}}>
+        <PatientCard patient={patient} />
+      </View>
 
-          <PatientCard patient={patient} />            
+      <ScrollView style={{flex: 1, marginTop: 10}}>
+        <View style={{paddingHorizontal: 16, paddingBottom: 16}}>
 
           {/* CHARTS */}
-          <View style={{marginTop: 20, gap: 20}}>
+          <View style={{gap: 20}}>
             <ChartCard
-              text='Fósforo(mg/dL)'
+              type='Fósforo (mg/dL)'
               exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Fósforo(mg/dL)'))}
+                exam.patientId === patient.id && exam.type.includes('Fósforo'))}
+              yMaxGridValue={4}
+              yMinGridValue={7.3}
             />
             <ChartCard
-              text='Cálcio ionizado(mg/dL)'
+              type='Cálcio ionizado (mmol/L)'
               exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Cálcio ionizado(mg/dL)'))}
+                exam.patientId === patient.id && exam.type.includes('Cálcio ionizado'))}
+              yMaxGridValue={1.1}
+              yMinGridValue={1.4}
             />
             <ChartCard
-              text='Pressão arterial(mmHg)'
+              type='Pressão arterial (mmHg)'
               exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Pressão arterial(mmHg)'))}
+                exam.patientId === patient.id && exam.type.includes('Pressão arterial'))}
+              yMaxGridValue={80}
+              yMinGridValue={220}
             />
             <ChartCard
-              text='Ureia(mg/dL)'
+              type='Ureia (mg/dL)'
               exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Ureia(mg/dL)'))}
+                exam.patientId === patient.id && exam.type.includes('Ureia'))}
+              yMaxGridValue={10}
+              yMinGridValue={60}
             />
             <ChartCard
-              text='Creatinina'
+              type='Creatinina (mg/dL)'
               exams={examsMocks.filter(exam =>
                 exam.patientId === patient.id && exam.type.includes('Creatinina'))}
+              yMaxGridValue={0.4}
+              yMinGridValue={1.6}
             />
           </View>
           {/* END CHARTS */}
@@ -91,6 +103,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
 
         </View>
       </ScrollView>
+
     </View>
   );
 }
