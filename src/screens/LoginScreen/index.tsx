@@ -13,13 +13,13 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 function LoginScreen(): React.JSX.Element {
   const { login, user } = useContext(AuthContext);
-  const [loginText, setLoginText] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
   function handleEnterPressed() {
     // todo: implement login
-    login({ id: '1', email: loginText });
+    login({ id: '1', email });
   }
 
 
@@ -36,13 +36,22 @@ function LoginScreen(): React.JSX.Element {
           <Text style={styles.text}>
             Login
           </Text>
-          <TextInput style={styles.textInput} onChangeText={setLoginText} />
+          <TextInput
+            style={styles.textInput}
+            value={email}
+            onChangeText={setEmail}
+          />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.text}>
             Senha
           </Text>
-          <TextInput style={styles.textInput} secureTextEntry onChangeText={setPassword} />
+          <TextInput
+            secureTextEntry
+            style={styles.textInput}
+            value={password}
+            onChangeText={setPassword}
+          />
         </View>
 
         <View style={styles.loginButtonsContainer}>

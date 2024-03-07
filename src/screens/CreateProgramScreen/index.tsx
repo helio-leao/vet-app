@@ -18,7 +18,7 @@ function CreateProgramScreen(): React.JSX.Element {
   const navigation = useNavigation<StackNavigationProp>();
   const route = useRoute<PatientStatusScreenProp>();
   const [patient, setPatient] = useState<Patient>();
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState<boolean[]>([]);
 
 
   useEffect(() => {
@@ -49,13 +49,23 @@ function CreateProgramScreen(): React.JSX.Element {
           <View style={{gap: 10, paddingRight: 10}}>
             <SwitchRow
               text={'Aferição de pressão arterial'}
-              value={isEnabled}
-              onValueChange={setIsEnabled}
+              value={isEnabled[0]}
+              onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[0] = value
+                return updated
+              })}
             />
             <SwitchRow
               text={'Escore corporal'}
-              value={isEnabled}
-              onValueChange={setIsEnabled}
+              value={isEnabled[1]}
+              onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[1] = value
+                return updated
+              })}
             />
           </View>
 
@@ -67,8 +77,13 @@ function CreateProgramScreen(): React.JSX.Element {
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
               <SwitchRow
                 text={'Hemograma'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[2]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[2] = value
+                return updated
+              })}
               />
             </View>
           </View>
@@ -81,28 +96,53 @@ function CreateProgramScreen(): React.JSX.Element {
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
               <SwitchRow
                 text={'Albumina'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[3]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[3] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Globulinas'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[4]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[4] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Creatinina'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[5]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[5] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Ureia'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[6]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[6] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'SDMA'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[7]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[7] = value
+                return updated
+              })}
               />
             </View>
           </View>
@@ -110,8 +150,13 @@ function CreateProgramScreen(): React.JSX.Element {
           <View style={{paddingRight: 10}}>
             <SwitchRow
               text={'Hemogasometria'}
-              value={isEnabled}
-              onValueChange={setIsEnabled}
+              value={isEnabled[8]}
+              onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[8] = value
+                return updated
+              })}
             />
           </View>
 
@@ -123,13 +168,23 @@ function CreateProgramScreen(): React.JSX.Element {
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
               <SwitchRow
                 text={'Sumário'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[9]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[9] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'RPCU'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[10]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[10] = value
+                return updated
+              })}
               />
             </View>
           </View>
@@ -142,38 +197,73 @@ function CreateProgramScreen(): React.JSX.Element {
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
               <SwitchRow
                 text={'Cálcio ionizado'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[11]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[11] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Cálcio total'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[12]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[12] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Fósforo'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[13]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[13] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Sódio'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[14]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[14] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Potássio'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[15]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[15] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Cloreto'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[16]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[16] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Magnésio'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[17]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[17] = value
+                return updated
+              })}
               />
             </View>
           </View>
@@ -186,13 +276,23 @@ function CreateProgramScreen(): React.JSX.Element {
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
               <SwitchRow
                 text={'Ultrassonografia abdominal'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[18]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[18] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'Raio X'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[19]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[19] = value
+                return updated
+              })}
               />
             </View>
           </View>
@@ -205,13 +305,23 @@ function CreateProgramScreen(): React.JSX.Element {
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 10, gap: 10}}>
               <SwitchRow
                 text={'PTH'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[20]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[20] = value
+                return updated
+              })}
               />
               <SwitchRow
                 text={'TSH'}
-                value={isEnabled}
-                onValueChange={setIsEnabled}
+                value={isEnabled[21]}
+                onValueChange={value => setIsEnabled(prev => {
+                const updated = [...prev]
+                // @ts-ignore
+                updated[21] = value
+                return updated
+              })}
               />
             </View>
           </View>

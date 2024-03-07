@@ -29,7 +29,7 @@ function PatientSearchScreen(): React.JSX.Element {
         <TextInput
           style={styles.textInput}
           placeholder='Buscar Paciente'
-          placeholderTextColor={'#666'}
+          placeholderTextColor={'#aaa'}
         />
         <TouchableOpacity style={{position: 'absolute', top: 8, right: 8}}>
           <FontAwesome
