@@ -12,9 +12,9 @@ const Tab = createBottomTabNavigator();
 
 
 export default function AppNavigator() {
-  const { user } = useContext(AuthContext);
+  const { accessToken } = useContext(AuthContext);
 
-  if(!user) return <LoginScreen />
+  if(!accessToken) return <LoginScreen />
 
   return (
     <Tab.Navigator

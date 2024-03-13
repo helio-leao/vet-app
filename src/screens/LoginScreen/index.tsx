@@ -6,20 +6,28 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 import googleLogo from '../../assets/images/google-logo.png';
 import { AuthContext } from '../../contexts/AuthProvider';
+import axios from 'axios';
 
 
 function LoginScreen(): React.JSX.Element {
-  const { login, user } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 
-  function handleEnterPressed() {
-    // todo: implement login
-    login({ id: '1', email });
+  async function handleEnterPressed() {
+    const url = `${process.env.API_URL}/auth/login`;
+
+    try {
+      const {data} = await axios.post(url, { email, password });
+      login(data.accessToken);
+    } catch {
+      Alert.alert('Atenção', 'Ocorreu um erro inesperado.');
+    }    
   }
 
 

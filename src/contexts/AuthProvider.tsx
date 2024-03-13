@@ -2,14 +2,9 @@ import { ReactNode, createContext, useState } from "react";
 
 
 type AuthContextType = {
-  user: User | null;
-  login: (userData: User) => void;
+  accessToken: string | null;
+  login: (accessToken: string) => void;
   logout: () => void;
-}
-
-type User = {
-  id: string;
-  email: string;
 }
 
 type AuthProviderProps = {
@@ -17,7 +12,7 @@ type AuthProviderProps = {
 }
 
 const initialAuthContext: AuthContextType = {
-  user: null,
+  accessToken: null,
   login: () => {},
   logout: () => {}
 };
@@ -27,19 +22,19 @@ export const AuthContext = createContext<AuthContextType>(initialAuthContext);
 
 
 export function AuthProvider({children}: AuthProviderProps) {
-  const [user, setUser] = useState<User|null>(null);
+  const [accessToken, setAccessToken] = useState<string|null>(null);
 
-  function login(userData: User) {
-    setUser(userData);
+  function login(accessToken: string) {
+    setAccessToken(accessToken);
   }
 
   function logout() {
-    setUser(null);
+    setAccessToken(null);
   }
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout }}
+      value={{ accessToken, login, logout }}
     >
       {children}
     </AuthContext.Provider>
