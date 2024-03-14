@@ -1,16 +1,14 @@
 export type Patient = {
-  id: string;
+  _id: string;
   name: string;
-  picture: string;
+  pictureUrl: string;
   healthDescription: string;
-  birthdate: string;
-  tutor: {
-    name: string;
-  };
+  birthdate: Date;
+  tutorName: string;
 }
 
 export type Exam = {
-  id: string;
+  _id: string;
   type: string;
   date: string;
   result: number;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,14 +7,33 @@ import {
   FlatList,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import patientsMocks from '../../mocks/patients.json';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '../../navigation/HomeStack';
 import PatientCard from '../../components/PatientCard';
+import { AuthContext } from '../../contexts/AuthProvider';
+import axios from 'axios';
+import { Patient } from '../../types';
 
 
 function PatientSearchScreen(): React.JSX.Element {
   const navigation = useNavigation<StackNavigationProp>();
+  const {accessToken} = useContext(AuthContext);
+  const [patients, setPatients] = useState<Patient[]>([]);
+
+
+  useEffect(() => {
+    async function getPatients() {
+      const url = `${process.env.API_URL}/patients`;
+      
+      const {data} = await axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        }
+      });
+      setPatients(data);
+    }
+    getPatients();
+  }, []);
 
 
   function handlePatientCardPress(id: string) {
@@ -44,11 +63,11 @@ function PatientSearchScreen(): React.JSX.Element {
       <View style={styles.pacientListContainer}>
         <FlatList
           contentContainerStyle={{padding: 10, gap: 10}}
-          data={patientsMocks}
+          data={patients}
           renderItem={({item: patient}) => (
             <PatientCard
               patient={patient}
-              onPress={() => handlePatientCardPress(patient.id)}
+              onPress={() => handlePatientCardPress(patient._id)}
             />
           )}
         />        

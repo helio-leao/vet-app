@@ -36,7 +36,7 @@ function CardContent({patient}: {patient: Patient}) {
     <>
       <Image
         style={styles.photo}
-        source={{uri: patient.picture}}
+        source={{uri: patient.pictureUrl}}
       />
       <View style={{flex: 1}}>
 
@@ -53,7 +53,7 @@ function CardContent({patient}: {patient: Patient}) {
           {patient.healthDescription}
         </Text>
         <Text style={styles.text}>
-          Tutor(a): {patient.tutor.name}
+          Tutor(a): {patient.tutorName}
         </Text>
 
       </View>
