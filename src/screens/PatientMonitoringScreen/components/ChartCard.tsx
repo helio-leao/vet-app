@@ -55,7 +55,7 @@ function Chart({
 }: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
 
   const data = exams.map(exam => exam.result);
-  const labels = exams.map(exam => moment(exam.date).format('D-MM-YY'));
+  const labels = exams.map(exam => moment(exam.date).utc().format('D-MM-YY'));
 
   return(
     <View style={{ marginHorizontal: 20 }}>
@@ -85,7 +85,7 @@ function Chart({
         style={{ marginTop: 5 }}
         data={labels}
         formatLabel={(value: number, index: number) => labels[index]}
-        contentInset={{ left: 50, right: 20 }}
+        contentInset={{ left: 60, right: 28 }}
         svg={{ fontSize: 14, fill: 'grey' }}
       />
     </View>
