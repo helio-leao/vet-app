@@ -55,7 +55,7 @@ function Chart({
 }: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
 
   const data = exams.map(exam => exam.result);
-  const labels = exams.map(exam => moment(exam.date).utc().format('D-MM-YY'));
+  const labels = exams.map(exam => moment(exam.date).utc().format('DD-MM-YY'));
 
   return(
     <View style={{ marginHorizontal: 20 }}>

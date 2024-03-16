@@ -13,11 +13,14 @@ import { useRoute } from '@react-navigation/native';
 import ChartCard from './components/ChartCard';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthProvider';
+import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
+import ContainerMessage from '../../components/ContainerMessage';
 
 
 function PatientMonitoringScreen(): React.JSX.Element {
   const {accessToken} = useContext(AuthContext);
   const route = useRoute<PatientMonitoringScreenProp>();
+  const [isLoading, setIsLoading] = useState(true);
   const [patient, setPatient] = useState<Patient>();
   const [exams, setExams] = useState<Exam[]>([]);
 
@@ -26,27 +29,35 @@ function PatientMonitoringScreen(): React.JSX.Element {
     async function loadData() {
       const { id } = route.params;
 
-      const { data: patientData } = await axios.get(`${process.env.API_URL}/patients/${id}`, {
+      const examsRequest = axios.get(`${process.env.API_URL}/exams/${id}`);
+      const patientRequest = axios.get(`${process.env.API_URL}/patients/${id}`, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
         }
-      });  
-      const { data: examsData } = await axios.get(`${process.env.API_URL}/exams/${id}`);  
+      });
+
+      const [{data: examsData}, {data: patientData}] = await Promise.all([
+        examsRequest,
+        patientRequest,
+      ]);
+
       setPatient(patientData);
       setExams(examsData);
+      setIsLoading(false);
     }
     loadData();
   }, []);
 
 
+  if(isLoading) {
+    return (
+      <ContainerLoadingIndicator />
+    );
+  }
+
   if(!patient) {
     return (
-      <View style={[
-        styles.screenContainer,
-        {justifyContent: 'center', alignItems: 'center'}
-      ]}>
-        <Text>Not found</Text>
-      </View>
+      <ContainerMessage text='Not found' />
     );
   }
 

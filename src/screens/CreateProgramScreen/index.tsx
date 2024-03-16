@@ -9,17 +9,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { PatientStatusScreenProp, StackNavigationProp } from '../../navigation/HomeStack';
-import patientsMocks from '../../mocks/patients.json';
 import { Patient } from '../../types';
 import PatientCard from '../../components/PatientCard';
 import { AuthContext } from '../../contexts/AuthProvider';
 import axios from 'axios';
+import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
+import ContainerMessage from '../../components/ContainerMessage';
 
 
 function CreateProgramScreen(): React.JSX.Element {
   const {accessToken} = useContext(AuthContext);
   const navigation = useNavigation<StackNavigationProp>();
   const route = useRoute<PatientStatusScreenProp>();
+  const [isLoading, setIsLoading] = useState(true);
   const [patient, setPatient] = useState<Patient>();
   const [isEnabled, setIsEnabled] = useState<boolean[]>([]);
 
@@ -35,19 +37,21 @@ function CreateProgramScreen(): React.JSX.Element {
         }
       });  
       setPatient(data);
+      setIsLoading(false);
     }
     loadData();
   }, []);
 
 
+  if(isLoading) {
+    return (
+      <ContainerLoadingIndicator />
+    );
+  }
+
   if(!patient) {
     return (
-      <View style={[
-        styles.screenContainer,
-        {justifyContent: 'center', alignItems: 'center'}
-      ]}>
-        <Text>Not found</Text>
-      </View>
+      <ContainerMessage text='Not found' />
     );
   }
 

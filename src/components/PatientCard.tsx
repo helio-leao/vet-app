@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { Patient } from '../types';
 
+// todo: add the age of the animal
+
 
 type PatientCardProps = {
   patient: Patient,
@@ -45,7 +47,7 @@ function CardContent({patient}: {patient: Patient}) {
             {patient.name}
           </Text>
           {/* <Text style={{fontSize: 12, color: '#0aa'}}>
-            Última consulta: {patient.latestAppointment}
+            Idade: {patient.latestAppointment}
           </Text> */}
         </View>
 

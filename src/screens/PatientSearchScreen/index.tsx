@@ -13,11 +13,13 @@ import PatientCard from '../../components/PatientCard';
 import { AuthContext } from '../../contexts/AuthProvider';
 import axios from 'axios';
 import { Patient } from '../../types';
+import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
 
 
 function PatientSearchScreen(): React.JSX.Element {
   const navigation = useNavigation<StackNavigationProp>();
   const {accessToken} = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
   const [patients, setPatients] = useState<Patient[]>([]);
 
 
@@ -31,6 +33,7 @@ function PatientSearchScreen(): React.JSX.Element {
         }
       });
       setPatients(data);
+      setIsLoading(false);
     }
     getPatients();
   }, []);
@@ -61,16 +64,20 @@ function PatientSearchScreen(): React.JSX.Element {
 
 
       <View style={styles.pacientListContainer}>
-        <FlatList
-          contentContainerStyle={{padding: 10, gap: 10}}
-          data={patients}
-          renderItem={({item: patient}) => (
-            <PatientCard
-              patient={patient}
-              onPress={() => handlePatientCardPress(patient._id)}
-            />
-          )}
-        />        
+        {isLoading ? (
+          <ContainerLoadingIndicator />
+        ) : (
+          <FlatList
+            contentContainerStyle={{padding: 10, gap: 10}}
+            data={patients}
+            renderItem={({item: patient}) => (
+              <PatientCard
+                patient={patient}
+                onPress={() => handlePatientCardPress(patient._id)}
+              />
+            )}
+          />
+        )}
       </View>
 
     </View>

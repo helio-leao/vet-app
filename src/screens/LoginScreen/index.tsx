@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import googleLogo from '../../assets/images/google-logo.png';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -17,17 +18,20 @@ function LoginScreen(): React.JSX.Element {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoginIn, setIsLoginIn] = useState(false);
 
 
   async function handleEnterPressed() {
-    const url = `${process.env.API_URL}/auth/login`;
-
     try {
+      const url = `${process.env.API_URL}/auth/login`;
+      setIsLoginIn(true);
       const {data} = await axios.post(url, { email, password });
       login(data.accessToken);
     } catch {
       Alert.alert('Atenção', 'Ocorreu um erro inesperado.');
-    }    
+    } finally {
+      setIsLoginIn(false);
+    }
   }
 
 
@@ -68,10 +72,14 @@ function LoginScreen(): React.JSX.Element {
               Esqueci minha senha
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleEnterPressed}>
-            <Text style={[styles.text, {color: '#fff'}]}>
-              Entrar
-            </Text>
+          <TouchableOpacity style={styles.button} disabled={isLoginIn} onPress={handleEnterPressed}>
+            {isLoginIn ? (
+              <ActivityIndicator color={'#fff'} />
+            ) : (
+              <Text style={[styles.text, {color: '#fff'}]}>
+                Entrar
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -144,8 +152,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#000',
-    paddingHorizontal: 26,
-    paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    width: 80,
     borderRadius: 4,
   },
   centralizedContainer: {
