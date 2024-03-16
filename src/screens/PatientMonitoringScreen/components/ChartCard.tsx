@@ -8,6 +8,7 @@ import {
 import chartPlaceholder from '../../../assets/images/chart-placeholder.png';
 import { LineChart, YAxis, Grid, XAxis } from 'react-native-svg-charts';
 import { Exam } from '../../../types';
+import moment from 'moment';
 
 
 type ChartCardProps = {
@@ -54,7 +55,7 @@ function Chart({
 }: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
 
   const data = exams.map(exam => exam.result);
-  const labels = exams.map(exam => exam.date);
+  const labels = exams.map(exam => moment(exam.date).format('D-MM-YY'));
 
   return(
     <View style={{ marginHorizontal: 20 }}>

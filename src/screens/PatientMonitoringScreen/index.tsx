@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -6,23 +6,36 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import patientsMocks from '../../mocks/patients.json';
-import examsMocks from '../../mocks/exams.json';
-import { Patient } from '../../types';
+import { Exam, Patient } from '../../types';
 import PatientCard from '../../components/PatientCard';
 import { PatientMonitoringScreenProp } from '../../navigation/HomeStack';
 import { useRoute } from '@react-navigation/native';
 import ChartCard from './components/ChartCard';
+import axios from 'axios';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 
 function PatientMonitoringScreen(): React.JSX.Element {
+  const {accessToken} = useContext(AuthContext);
   const route = useRoute<PatientMonitoringScreenProp>();
   const [patient, setPatient] = useState<Patient>();
+  const [exams, setExams] = useState<Exam[]>([]);
 
 
   useEffect(() => {
-    const { id } = route.params;
-    setPatient(patientsMocks.find(patient => patient.id === id));
+    async function loadData() {
+      const { id } = route.params;
+
+      const { data: patientData } = await axios.get(`${process.env.API_URL}/patients/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        }
+      });  
+      const { data: examsData } = await axios.get(`${process.env.API_URL}/exams/${id}`);  
+      setPatient(patientData);
+      setExams(examsData);
+    }
+    loadData();
   }, []);
 
 
@@ -50,36 +63,31 @@ function PatientMonitoringScreen(): React.JSX.Element {
           <View style={{gap: 20}}>
             <ChartCard
               type='Fósforo (mg/dL)'
-              exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Fósforo'))}
+              exams={exams.filter(exam => exam.type === 'fósforo')}
               yMaxGridValue={4}
               yMinGridValue={7.3}
             />
             <ChartCard
               type='Cálcio ionizado (mmol/L)'
-              exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Cálcio ionizado'))}
+              exams={exams.filter(exam => exam.type === 'cálcio ionizado')}
               yMaxGridValue={1.1}
               yMinGridValue={1.4}
             />
             <ChartCard
               type='Pressão arterial (mmHg)'
-              exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Pressão arterial'))}
+              exams={exams.filter(exam => exam.type === 'pressão arterial')}
               yMaxGridValue={80}
               yMinGridValue={220}
             />
             <ChartCard
               type='Ureia (mg/dL)'
-              exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Ureia'))}
+              exams={exams.filter(exam => exam.type === 'ureia')}
               yMaxGridValue={10}
               yMinGridValue={60}
             />
             <ChartCard
               type='Creatinina (mg/dL)'
-              exams={examsMocks.filter(exam =>
-                exam.patientId === patient.id && exam.type.includes('Creatinina'))}
+              exams={exams.filter(exam => exam.type === 'creatinina')}
               yMaxGridValue={0.4}
               yMinGridValue={1.6}
             />

@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -12,9 +12,12 @@ import { PatientStatusScreenProp, StackNavigationProp } from '../../navigation/H
 import patientsMocks from '../../mocks/patients.json';
 import { Patient } from '../../types';
 import PatientCard from '../../components/PatientCard';
+import { AuthContext } from '../../contexts/AuthProvider';
+import axios from 'axios';
 
 
 function CreateProgramScreen(): React.JSX.Element {
+  const {accessToken} = useContext(AuthContext);
   const navigation = useNavigation<StackNavigationProp>();
   const route = useRoute<PatientStatusScreenProp>();
   const [patient, setPatient] = useState<Patient>();
@@ -22,8 +25,18 @@ function CreateProgramScreen(): React.JSX.Element {
 
 
   useEffect(() => {
-    const { id } = route.params;
-    setPatient(patientsMocks.find(patient => patient.id === id));
+    async function loadData() {
+      const { id } = route.params;
+      const url = `${process.env.API_URL}/patients/${id}`
+
+      const { data } = await axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        }
+      });  
+      setPatient(data);
+    }
+    loadData();
   }, []);
 
 
