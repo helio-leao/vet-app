@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Patient } from '../types';
-
-// todo: add the age of the animal
+import moment from 'moment';
 
 
 type PatientCardProps = {
@@ -34,23 +33,42 @@ function PatientCard({patient, onPress}: PatientCardProps): React.JSX.Element {
 }
 
 function CardContent({patient}: {patient: Patient}) {
+
+  function getAge() {
+    const date1 = moment(patient.birthdate);
+    const date2 = moment(new Date());
+    
+    const diffYears = date2.diff(date1, 'years');
+    date1.add(diffYears, 'years');
+    const diffMonths = date2.diff(date1, 'months');
+
+    let age = '';
+
+    if(diffYears) {
+      age = `${diffYears} ano${diffYears > 1 ? 's' : ''}`;
+    }
+    if(diffMonths) {
+      age += `${diffYears > 1 ? ' e ' : ''}${diffMonths} ${diffMonths > 1 ? 'meses' : 'mês'}`;
+    }
+
+    return age;
+  }
+
   return(
     <>
       <Image
         style={styles.photo}
         source={{uri: patient.pictureUrl}}
       />
+
       <View style={{flex: 1}}>
 
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>          
-          <Text style={[styles.text, {fontSize: 24, fontWeight: '800'}]}>
-            {patient.name}
-          </Text>
-          {/* <Text style={{fontSize: 12, color: '#0aa'}}>
-            Idade: {patient.latestAppointment}
-          </Text> */}
-        </View>
-
+        <Text style={[styles.text, {fontSize: 24, fontWeight: '800'}]}>
+          {patient.name}
+        </Text>
+        <Text style={{fontSize: 12, color: '#0aa'}}>
+          {getAge()}
+        </Text>
         <Text style={styles.text}>
           {patient.healthDescription}
         </Text>
