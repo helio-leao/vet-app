@@ -17,6 +17,7 @@ import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthProvider';
 import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
 import ContainerMessage from '../../components/ContainerMessage';
+import RelationChartCard from './components/RelationChartCard';
 
 
 function PatientMonitoringScreen(): React.JSX.Element {
@@ -77,40 +78,49 @@ function PatientMonitoringScreen(): React.JSX.Element {
           {/* CHARTS */}
           <View style={{gap: 20}}>
             <ChartCard
-              type='Fósforo (mg/dL)'
+              title='Fósforo (mg/dL)'
               exams={exams.filter(exam => exam.type === 'fósforo').slice(-4)}
               yMaxGridValue={4}
               yMinGridValue={7.3}
             />
             <ChartCard
-              type='Cálcio ionizado (mmol/L)'
+              title='Cálcio ionizado (mmol/L)'
               exams={exams.filter(exam => exam.type === 'cálcio ionizado').slice(-4)}
               yMaxGridValue={1.1}
               yMinGridValue={1.4}
             />
             <ChartCard
-              type='Pressão arterial (mmHg)'
+              title='Pressão arterial (mmHg)'
               exams={exams.filter(exam => exam.type === 'pressão arterial').slice(-4)}
               yMaxGridValue={80}
               yMinGridValue={220}
             />
             <ChartCard
-              type='Ureia (mg/dL)'
+              title='Ureia (mg/dL)'
               exams={exams.filter(exam => exam.type === 'ureia').slice(-4)}
               yMaxGridValue={10}
               yMinGridValue={60}
             />
             <ChartCard
-              type='Creatinina (mg/dL)'
+              title='Creatinina (mg/dL)'
               exams={exams.filter(exam => exam.type === 'creatinina').slice(-4)}
               yMaxGridValue={0.4}
               yMinGridValue={1.6}
             />
             <ChartCard
-              type='Densidade urinária'
+              title='Densidade urinária'
               exams={exams.filter(exam => exam.type === 'densidade urinária').slice(-4)}
               yMaxGridValue={1.001}
               yMinGridValue={1.080}
+            />
+            <RelationChartCard
+              titleSet1='Albumina'
+              titleSet2='Globulinas'
+              unit='g/dL'
+              set1={exams.filter(exam => exam.type === 'albumina').slice(-4)}
+              set2={exams.filter(exam => exam.type === 'globulinas').slice(-4)}
+              yMaxGridValue={2.3}
+              yMinGridValue={4.5}
             />
           </View>
           {/* END CHARTS */}

@@ -11,30 +11,48 @@ import { Exam } from '../../../types';
 import moment from 'moment';
 
 
-type ChartCardProps = {
-  exams: Exam[],
-  title: string,
+type RelationChartCardProps = {
+  set1: Exam[],
+  set2: Exam[],
+  titleSet1: string,
+  titleSet2: string,
+  unit: string,
   yMinGridValue: number,
   yMaxGridValue: number,
 }
 
 
-function ChartCard({
-  exams, 
-  title,
+function RelationChartCard({
+  set1,
+  set2,
+  titleSet1,
+  titleSet2,
+  unit,
   yMinGridValue,
   yMaxGridValue,
-}: ChartCardProps): React.JSX.Element {
+}: RelationChartCardProps): React.JSX.Element {
 
   return (
     <View style={styles.chartCard}>              
       <Text style={[styles.text, {marginBottom: 10, marginLeft: 10}]}>
-        {title}
+        <Text style={{color: '#0ab'}}>
+          {titleSet1}
+        </Text>
+        <Text>
+          {' x '}
+        </Text>
+        <Text style={{color: '#f00'}}>
+          {titleSet2}
+        </Text>
+        <Text>
+          {` (${unit})`}
+        </Text>
       </Text>
 
-      {exams.length > 1 ? (
+      {set1.length > 1 ? (
         <Chart
-          exams={exams} 
+          set1={set1} 
+          set2={set2}
           yMinGridValue={yMinGridValue}
           yMaxGridValue={yMaxGridValue}
         />
@@ -49,13 +67,24 @@ function ChartCard({
 }
 
 function Chart({
-  exams, 
+  set1,
+  set2,
   yMinGridValue, 
   yMaxGridValue,
-}: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
+}: { set1: Exam[], set2: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
 
-  const data = exams.map(exam => exam.result);
-  const labels = exams.map(exam => moment(exam.date).utc().format('DD-MM-YY'));
+  const labels = set1.map(exam => moment(exam.date).utc().format('DD-MM-YY'));
+  const data = [
+    {
+        data: set1.map(exam => exam.result),
+        svg: { stroke: '#0ab' },
+    },
+    {
+        data: set2.map(exam => exam.result),
+        svg: { stroke: '#f00' },
+    },
+  ];
+
 
   return(
     <View style={{ marginHorizontal: 20 }}>
@@ -75,7 +104,7 @@ function Chart({
           gridMin={yMinGridValue}
           gridMax={yMaxGridValue}
           data={data}
-          svg={{ stroke: '#0ab', strokeWidth: 2 }}
+          svg={{ strokeWidth: 2 }}
           contentInset={{ top: 20, bottom: 20 }}
         >
           <Grid />
@@ -88,6 +117,14 @@ function Chart({
         contentInset={{ left: 60, right: 28 }}
         svg={{ fontSize: 14, fill: 'grey' }}
       />
+      <XAxis
+        style={{ marginTop: 5 }}
+        data={labels}
+        formatLabel={(value: number, index: number) => (
+            data[0].data[index] / data[1].data[index]).toFixed(3)}
+        contentInset={{ left: 60, right: 28 }}
+        svg={{ fontSize: 14, fill: 'darkgreen' }}
+      />
     </View>
   );
 }
@@ -95,7 +132,7 @@ function Chart({
 const styles = StyleSheet.create({
   text: {
     fontSize: 16,
-    color: '#0ab',
+    color: '#999',
   },
   chartCard: {
     paddingBottom: 10,
@@ -110,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChartCard;
+export default RelationChartCard;
