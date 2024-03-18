@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { Exam, Patient } from '../../types';
 import PatientCard from '../../components/PatientCard';
@@ -29,21 +30,23 @@ function PatientMonitoringScreen(): React.JSX.Element {
     async function loadData() {
       const { id } = route.params;
 
-      const examsRequest = axios.get(`${process.env.API_URL}/exams/${id}`);
-      const patientRequest = axios.get(`${process.env.API_URL}/patients/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        }
-      });
-
-      const [{data: examsData}, {data: patientData}] = await Promise.all([
-        examsRequest,
-        patientRequest,
-      ]);
-
-      setPatient(patientData);
-      setExams(examsData);
-      setIsLoading(false);
+      try {
+        const examsRequest = axios.get(`${process.env.API_URL}/exams/${id}`);
+        const patientRequest = axios.get(`${process.env.API_URL}/patients/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+          }
+        });
+  
+        const [examsResponse, patientResponse] =
+          await Promise.all([examsRequest, patientRequest]);
+  
+        setPatient(patientResponse.data);
+        setExams(examsResponse.data);
+        setIsLoading(false);
+      } catch {
+        Alert.alert('Atenção', 'Ocorreu um erro inesperado.');
+      }
     }
     loadData();
   }, []);
@@ -57,7 +60,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
 
   if(!patient) {
     return (
-      <ContainerMessage text='Not found' />
+      <ContainerMessage text='Paciente não encontrado' />
     );
   }
 

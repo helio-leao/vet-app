@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +15,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import axios from 'axios';
 import { Patient } from '../../types';
 import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
+import ContainerMessage from '../../components/ContainerMessage';
 
 
 function PatientSearchScreen(): React.JSX.Element {
@@ -26,14 +28,19 @@ function PatientSearchScreen(): React.JSX.Element {
   useEffect(() => {
     async function getPatients() {
       const url = `${process.env.API_URL}/patients`;
-      
-      const {data} = await axios.get(url, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        }
-      });
-      setPatients(data);
-      setIsLoading(false);
+
+      try {
+        const {data} = await axios.get(url, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+          }
+        });
+        setPatients(data);
+      } catch {
+        Alert.alert('Atenção', 'Ocorreu um erro inesperado.');
+      } finally {
+        setIsLoading(false);
+      }      
     }
     getPatients();
   }, []);
@@ -68,13 +75,16 @@ function PatientSearchScreen(): React.JSX.Element {
           <ContainerLoadingIndicator />
         ) : (
           <FlatList
-            contentContainerStyle={{padding: 10, gap: 10}}
+            contentContainerStyle={{flex: 1, padding: 10, gap: 10}}
             data={patients}
             renderItem={({item: patient}) => (
               <PatientCard
                 patient={patient}
                 onPress={() => handlePatientCardPress(patient._id)}
               />
+            )}
+            ListEmptyComponent={() => (
+              <ContainerMessage text='Nenhum paciente encontrado' />
             )}
           />
         )}

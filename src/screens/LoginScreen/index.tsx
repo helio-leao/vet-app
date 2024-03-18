@@ -22,9 +22,9 @@ function LoginScreen(): React.JSX.Element {
 
 
   async function handleEnterPressed() {
+    const url = `${process.env.API_URL}/auth/login`;
+    setIsLoginIn(true);
     try {
-      const url = `${process.env.API_URL}/auth/login`;
-      setIsLoginIn(true);
       const {data} = await axios.post(url, { email, password });
       login(data.accessToken);
     } catch {

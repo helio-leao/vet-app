@@ -7,6 +7,7 @@ import {
   Switch,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { PatientStatusScreenProp, StackNavigationProp } from '../../navigation/HomeStack';
 import { Patient } from '../../types';
@@ -29,15 +30,19 @@ function CreateProgramScreen(): React.JSX.Element {
   useEffect(() => {
     async function loadData() {
       const { id } = route.params;
-      const url = `${process.env.API_URL}/patients/${id}`
+      const url = `${process.env.API_URL}/patients/${id}`;
 
-      const { data } = await axios.get(url, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        }
-      });  
-      setPatient(data);
-      setIsLoading(false);
+      try {
+        const { data } = await axios.get(url, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+          }
+        });
+        setPatient(data);
+        setIsLoading(false);
+      } catch {
+        Alert.alert('Atenção', 'Ocorreu um erro inesperado.');
+      }
     }
     loadData();
   }, []);
@@ -51,7 +56,7 @@ function CreateProgramScreen(): React.JSX.Element {
 
   if(!patient) {
     return (
-      <ContainerMessage text='Not found' />
+      <ContainerMessage text='Paciente não encontrado' />
     );
   }
 
