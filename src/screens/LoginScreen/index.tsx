@@ -49,7 +49,9 @@ function LoginScreen(): React.JSX.Element {
             Login
           </Text>
           <TextInput
-            style={styles.textInput}
+            style={[styles.textInput, styles.text]}
+            keyboardType='email-address'
+            autoCapitalize='none'
             value={email}
             onChangeText={setEmail}
           />
@@ -60,7 +62,7 @@ function LoginScreen(): React.JSX.Element {
           </Text>
           <TextInput
             secureTextEntry
-            style={styles.textInput}
+            style={[styles.textInput, styles.text]}
             value={password}
             onChangeText={setPassword}
           />

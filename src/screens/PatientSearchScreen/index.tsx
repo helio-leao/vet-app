@@ -49,7 +49,7 @@ function PatientSearchScreen(): React.JSX.Element {
 
       <View>
         <TextInput
-          style={styles.textInput}
+          style={[styles.textInput, styles.text]}
           placeholder='Buscar Paciente'
           placeholderTextColor={'#aaa'}
         />
