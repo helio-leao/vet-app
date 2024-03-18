@@ -74,33 +74,39 @@ function PatientMonitoringScreen(): React.JSX.Element {
           <View style={{gap: 20}}>
             <ChartCard
               type='Fósforo (mg/dL)'
-              exams={exams.filter(exam => exam.type === 'fósforo')}
+              exams={exams.filter(exam => exam.type === 'fósforo').slice(-4)}
               yMaxGridValue={4}
               yMinGridValue={7.3}
             />
             <ChartCard
               type='Cálcio ionizado (mmol/L)'
-              exams={exams.filter(exam => exam.type === 'cálcio ionizado')}
+              exams={exams.filter(exam => exam.type === 'cálcio ionizado').slice(-4)}
               yMaxGridValue={1.1}
               yMinGridValue={1.4}
             />
             <ChartCard
               type='Pressão arterial (mmHg)'
-              exams={exams.filter(exam => exam.type === 'pressão arterial')}
+              exams={exams.filter(exam => exam.type === 'pressão arterial').slice(-4)}
               yMaxGridValue={80}
               yMinGridValue={220}
             />
             <ChartCard
               type='Ureia (mg/dL)'
-              exams={exams.filter(exam => exam.type === 'ureia')}
+              exams={exams.filter(exam => exam.type === 'ureia').slice(-4)}
               yMaxGridValue={10}
               yMinGridValue={60}
             />
             <ChartCard
               type='Creatinina (mg/dL)'
-              exams={exams.filter(exam => exam.type === 'creatinina')}
+              exams={exams.filter(exam => exam.type === 'creatinina').slice(-4)}
               yMaxGridValue={0.4}
               yMinGridValue={1.6}
+            />
+            <ChartCard
+              type='Densidade urinária'
+              exams={exams.filter(exam => exam.type === 'densidade urinária').slice(-4)}
+              yMaxGridValue={1.001}
+              yMinGridValue={1.080}
             />
           </View>
           {/* END CHARTS */}
