@@ -1,3 +1,4 @@
+import {API_URL} from '@env';
 import React, { useContext, useState } from 'react';
 import {
   View,
@@ -22,7 +23,7 @@ function LoginScreen(): React.JSX.Element {
 
 
   async function handleEnterPressed() {
-    const url = `${process.env.API_URL}/auth/login`;
+    const url = `${API_URL}/auth/login`;
     setIsLoginIn(true);
     try {
       const {data} = await axios.post(url, { email, password });

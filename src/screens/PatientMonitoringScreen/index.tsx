@@ -1,3 +1,4 @@
+import {API_URL} from '@env';
 import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
@@ -31,8 +32,8 @@ function PatientMonitoringScreen(): React.JSX.Element {
       const { id } = route.params;
 
       try {
-        const examsRequest = axios.get(`${process.env.API_URL}/exams/${id}`);
-        const patientRequest = axios.get(`${process.env.API_URL}/patients/${id}`, {
+        const examsRequest = axios.get(`${API_URL}/exams/${id}`);
+        const patientRequest = axios.get(`${API_URL}/patients/${id}`, {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
           }

@@ -1,3 +1,4 @@
+import {API_URL} from '@env';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import {
@@ -30,7 +31,7 @@ function CreateProgramScreen(): React.JSX.Element {
   useEffect(() => {
     async function loadData() {
       const { id } = route.params;
-      const url = `${process.env.API_URL}/patients/${id}`;
+      const url = `${API_URL}/patients/${id}`;
 
       try {
         const { data } = await axios.get(url, {

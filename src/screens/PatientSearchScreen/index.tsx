@@ -1,3 +1,4 @@
+import {API_URL} from '@env';
 import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
@@ -27,7 +28,7 @@ function PatientSearchScreen(): React.JSX.Element {
 
   useEffect(() => {
     async function getPatients() {
-      const url = `${process.env.API_URL}/patients`;
+      const url = `${API_URL}/patients`;
 
       try {
         const {data} = await axios.get(url, {
