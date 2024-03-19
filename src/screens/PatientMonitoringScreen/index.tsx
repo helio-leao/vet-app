@@ -80,38 +80,38 @@ function PatientMonitoringScreen(): React.JSX.Element {
             <ChartCard
               title='Fósforo (mg/dL)'
               exams={exams.filter(exam => exam.type === 'fósforo').slice(-4)}
-              yMaxGridValue={4}
-              yMinGridValue={7.3}
+              yMinGridValue={4}
+              yMaxGridValue={7.3}
             />
             <ChartCard
               title='Cálcio ionizado (mmol/L)'
               exams={exams.filter(exam => exam.type === 'cálcio ionizado').slice(-4)}
-              yMaxGridValue={1.1}
-              yMinGridValue={1.4}
+              yMinGridValue={1.1}
+              yMaxGridValue={1.4}
             />
             <ChartCard
               title='Pressão arterial (mmHg)'
               exams={exams.filter(exam => exam.type === 'pressão arterial').slice(-4)}
-              yMaxGridValue={80}
-              yMinGridValue={220}
+              yMinGridValue={80}
+              yMaxGridValue={220}
             />
             <ChartCard
               title='Ureia (mg/dL)'
               exams={exams.filter(exam => exam.type === 'ureia').slice(-4)}
-              yMaxGridValue={10}
-              yMinGridValue={60}
+              yMinGridValue={10}
+              yMaxGridValue={60}
             />
             <ChartCard
               title='Creatinina (mg/dL)'
               exams={exams.filter(exam => exam.type === 'creatinina').slice(-4)}
-              yMaxGridValue={0.4}
-              yMinGridValue={1.6}
+              yMinGridValue={0.4}
+              yMaxGridValue={1.6}
             />
             <ChartCard
               title='Densidade urinária'
               exams={exams.filter(exam => exam.type === 'densidade urinária').slice(-4)}
-              yMaxGridValue={1.001}
-              yMinGridValue={1.080}
+              yMinGridValue={1.001}
+              yMaxGridValue={1.070}
             />
             <RelationChartCard
               titleSet1='Albumina'
@@ -119,8 +119,8 @@ function PatientMonitoringScreen(): React.JSX.Element {
               unit='g/dL'
               set1={exams.filter(exam => exam.type === 'albumina').slice(-4)}
               set2={exams.filter(exam => exam.type === 'globulinas').slice(-4)}
-              yMaxGridValue={2.3}
-              yMinGridValue={4.5}
+              yMinGridValue={2.3}
+              yMaxGridValue={4.5}
             />
           </View>
           {/* END CHARTS */}

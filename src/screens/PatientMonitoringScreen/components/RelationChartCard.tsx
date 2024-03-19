@@ -121,7 +121,7 @@ function Chart({
         style={{ marginTop: 5 }}
         data={labels}
         formatLabel={(value: number, index: number) => (
-            data[0].data[index] / data[1].data[index]).toFixed(3)}
+            data[0].data[index] / data[1].data[index]).toFixed(2)}
         contentInset={{ left: 60, right: 28 }}
         svg={{ fontSize: 14, fill: 'darkgreen' }}
       />

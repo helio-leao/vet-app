@@ -67,7 +67,7 @@ function CreateProgramScreen(): React.JSX.Element {
       <PatientCard patient={patient} />
 
       <ScrollView style={styles.contentContainer}>
-        <View style={{padding: 10, gap: 10}}>
+        <View style={{padding: 10, paddingBottom: 20, gap: 10}}>
 
           <View style={{gap: 10, paddingRight: 10}}>
             <SwitchRow
@@ -404,7 +404,8 @@ function SwitchRow({text, value, onValueChange}: SwitchRowProps) {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    padding: 16,
+    paddingTop: 16,
+    paddingHorizontal: 16,
   },
   contentContainer: {
     marginTop: 10,
