@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack';
 import PatientSearchScreen from '../screens/PatientSearchScreen';
 import CreateProgramScreen from '../screens/CreateProgramScreen';
 import { RouteProp } from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import PatientMonitoringScreen from '../screens/PatientMonitoringScreen';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { NotificationsContext } from '../contexts/NotificationsProvider';
 
 
 export type StackParamList = {
@@ -24,6 +25,9 @@ const Stack = createNativeStackNavigator();
 
 
 export default function HomeStack() {
+  const { notifications } = useContext(NotificationsContext);
+
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -32,8 +36,13 @@ export default function HomeStack() {
         }, 
         headerTintColor: '#fff',
         headerRight: () => (
-          <TouchableOpacity>
-            <Octicons name="bell-fill" size={22} color="#fff" />
+          <TouchableOpacity style={styles.button}>
+            <Octicons name="bell-fill" size={26} color="#fff" />
+            <View style={styles.notificationsCountContainer}>
+              <Text style={{color: '#fff'}}>
+                {notifications.length}
+              </Text>
+            </View>
           </TouchableOpacity>
         )
       }}
@@ -56,3 +65,22 @@ export default function HomeStack() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  notificationsCountContainer: {
+    backgroundColor: '#f00',
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center', borderRadius: 10,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+});

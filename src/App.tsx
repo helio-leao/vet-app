@@ -6,15 +6,18 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './navigation/AppNavigator';
 import { AuthProvider } from './contexts/AuthProvider';
+import { NotificationsProvider } from './contexts/NotificationsProvider';
 
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.screenContainer}>
       <AuthProvider>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
+        <NotificationsProvider>
+          <NavigationContainer>
+            <AppNavigator />
+          </NavigationContainer>
+        </NotificationsProvider>
       </AuthProvider>
     </SafeAreaView>
   );
