@@ -29,7 +29,7 @@ export function NotificationsProvider({children}: NotificationsProviderProps) {
 
   useEffect(() => {
     async function startNotifications() {
-      const url = `${API_URL}/exams/notifications`;
+      const url = `${API_URL}/notifications`;
 
       try {
         const {data} = await axios.get(url, {
@@ -39,7 +39,7 @@ export function NotificationsProvider({children}: NotificationsProviderProps) {
         });
         setNotifications(data);
       } catch (error) {
-        Alert.alert('Atenção', 'Ocorreu um erro inesperado');
+        Alert.alert('Atenção', 'Não foi possível obter as notificações');
       }
     }
 

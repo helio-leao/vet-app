@@ -33,7 +33,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
       const { id } = route.params;
 
       try {
-        const examsRequest = axios.get(`${API_URL}/exams/${id}`);
+        const examsRequest = axios.get(`${API_URL}/patients/${id}/exams`);
         const patientRequest = axios.get(`${API_URL}/patients/${id}`, {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
