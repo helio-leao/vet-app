@@ -12,5 +12,12 @@ export type Exam = {
   type: string;
   date: string;
   result: number;
-  patientId: string;
+  patient: Patient;
+}
+
+export type Notification = {
+  _id: string;
+  message: string;
+  status: 'UNREAD' | 'READ';
+  exam: Exam;
 }

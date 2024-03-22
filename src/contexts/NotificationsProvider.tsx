@@ -1,13 +1,14 @@
 import {API_URL} from '@env';
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { Exam } from "../types";
+import { Notification } from "../types";
 import { Alert } from "react-native";
 import axios from 'axios';
 import { AuthContext } from './AuthProvider';
 
 
 type NotificationsContextType = {
-  notifications: Exam[];
+  notifications: Notification[];
+  updateNotifications: () => Promise<void>,
 }
 
 type NotificationsProviderProps = {
@@ -16,6 +17,7 @@ type NotificationsProviderProps = {
 
 const initialNotificationsContext: NotificationsContextType = {
   notifications: [],
+  updateNotifications: () => Promise.resolve(),
 };
 
 
@@ -24,34 +26,35 @@ export const NotificationsContext = createContext<NotificationsContextType>(init
 
 export function NotificationsProvider({children}: NotificationsProviderProps) {
   const {accessToken} = useContext(AuthContext);
-  const [notifications, setNotifications] = useState<Exam[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+
+  async function updateNotifications() {
+    const url = `${API_URL}/notifications`;
+
+    try {
+      const {data} = await axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        }
+      });
+      setNotifications(data);
+    } catch (error) {
+      Alert.alert('Atenção', 'Não foi possível obter as notificações');
+    }
+  }
 
 
   useEffect(() => {
-    async function startNotifications() {
-      const url = `${API_URL}/notifications`;
-
-      try {
-        const {data} = await axios.get(url, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-          }
-        });
-        setNotifications(data);
-      } catch (error) {
-        Alert.alert('Atenção', 'Não foi possível obter as notificações');
-      }
-    }
-
     if(accessToken) {
-      startNotifications();
+      updateNotifications();
     }
   }, [accessToken]);
 
 
   return (
     <NotificationsContext.Provider
-      value={{ notifications }}
+      value={{ notifications, updateNotifications }}
     >
       {children}
     </NotificationsContext.Provider>

@@ -93,7 +93,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
               title='Pressão arterial (mmHg)'
               exams={exams.filter(exam => exam.type === 'pressão arterial').slice(-4)}
               yMinGridValue={80}
-              yMaxGridValue={220}
+              yMaxGridValue={260}
             />
             <ChartCard
               title='Ureia (mg/dL)'
