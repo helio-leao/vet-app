@@ -5,6 +5,8 @@ import { Alert } from "react-native";
 import axios from 'axios';
 import { AuthContext } from './AuthProvider';
 
+const NOTIFICATION_FETCHING_INTERVAL = 60000;
+
 
 type NotificationsContextType = {
   notifications: Notification[];
@@ -48,6 +50,7 @@ export function NotificationsProvider({children}: NotificationsProviderProps) {
   useEffect(() => {
     if(accessToken) {
       updateNotifications();
+      setInterval(updateNotifications, NOTIFICATION_FETCHING_INTERVAL);
     }
   }, [accessToken]);
 
