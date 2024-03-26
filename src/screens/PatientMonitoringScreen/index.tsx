@@ -101,14 +101,14 @@ function PatientMonitoringScreen(): React.JSX.Element {
             <ChartCard
               title='Creatinina (mg/dL)'
               exams={exams.filter(exam => exam.type === 'creatinina').slice(-4)}
-              yMinGridValue={0.4}
-              yMaxGridValue={1.6}
+              yMinGridValue={0.1}
+              yMaxGridValue={20}
             />
             <ChartCard
               title='Ureia (mg/dL)'
               exams={exams.filter(exam => exam.type === 'ureia').slice(-4)}
-              yMinGridValue={10}
-              yMaxGridValue={60}
+              yMinGridValue={0.1}
+              yMaxGridValue={600}
             />
             <ChartCard
               title='Densidade urinária'
@@ -125,8 +125,8 @@ function PatientMonitoringScreen(): React.JSX.Element {
             <ChartCard
               title='Cálcio ionizado (mmol/L)'
               exams={exams.filter(exam => exam.type === 'cálcio ionizado').slice(-4)}
-              yMinGridValue={1.1}
-              yMaxGridValue={1.4}
+              yMinGridValue={0.1}
+              yMaxGridValue={3}
             />
             <ChartCard
               title='Cálcio total (mg/dL)'
@@ -135,35 +135,35 @@ function PatientMonitoringScreen(): React.JSX.Element {
               yMaxGridValue={25}
             />
             <ChartCard
+              title='Fósforo (mg/dL)'
+              exams={exams.filter(exam => exam.type === 'fósforo').slice(-4)}
+              yMinGridValue={0.5}
+              yMaxGridValue={25}
+            />
+            <ChartCard
               title='Sódio (mEq/L)'
               exams={exams.filter(exam => exam.type === 'sódio').slice(-4)}
               yMinGridValue={110}
               yMaxGridValue={180}
-            />            
+            />
             <ChartCard
               title='Potássio (mEq/L)'
               exams={exams.filter(exam => exam.type === 'potássio').slice(-4)}
-              yMinGridValue={1.5}
-              yMaxGridValue={8}
-            />            
+              yMinGridValue={1}
+              yMaxGridValue={9}
+            />
             <ChartCard
-              title='Cloreto (mg/dL)'
+              title='Cloreto (mEq/L)'
               exams={exams.filter(exam => exam.type === 'cloreto').slice(-4)}
-              yMinGridValue={100}
-              yMaxGridValue={150}
-            />            
+              yMinGridValue={60}
+              yMaxGridValue={250}
+            />
             <ChartCard
               title='Magnésio (mg/dL)'
               exams={exams.filter(exam => exam.type === 'magnésio').slice(-4)}
               yMinGridValue={0}
-              yMaxGridValue={4}
-            />            
-            <ChartCard
-              title='Fósforo (mg/dL)'
-              exams={exams.filter(exam => exam.type === 'fósforo').slice(-4)}
-              yMinGridValue={4}
-              yMaxGridValue={7.3}
-            />            
+              yMaxGridValue={6}
+            />
           </View>
           {/* END CHARTS */}
 
