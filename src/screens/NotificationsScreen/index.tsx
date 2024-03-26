@@ -8,12 +8,14 @@ import moment from 'moment';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import { Notification } from '../../types';
+import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
 
 
 function NotificationsScreen() {
   const {accessToken} = useContext(AuthContext);
   const {notifications, updateNotifications} = useContext(NotificationsContext);
   const [initialNotifications, setInitialNotifications] = useState<Notification[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -41,10 +43,17 @@ function NotificationsScreen() {
       }
     }
     if(initialNotifications) {
+      setIsLoading(false);
       markNotificationsAsRead();
     }
   }, [initialNotifications]);
 
+
+  if(isLoading) {
+    return (
+      <ContainerLoadingIndicator />
+    );
+  }
 
   if(!initialNotifications || initialNotifications.length === 0) {
     return (
