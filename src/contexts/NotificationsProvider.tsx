@@ -41,7 +41,7 @@ export function NotificationsProvider({children}: NotificationsProviderProps) {
         }
       });
       setNotifications(data);
-    } catch (error) {
+    } catch {
       Alert.alert('Atenção', 'Não foi possível obter as notificações');
     }
   }

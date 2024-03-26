@@ -35,7 +35,7 @@ function NotificationsScreen() {
         try {
           await axios.put(url, { ids: unreadNotificationsIds }, { headers });
           await updateNotifications();
-        } catch (error) {
+        } catch {
           Alert.alert('Atenção', 'Ocorreu um erro inesperado');
         }
       }
