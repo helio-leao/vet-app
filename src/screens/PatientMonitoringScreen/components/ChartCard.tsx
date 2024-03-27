@@ -89,8 +89,8 @@ function Chart({
       <XAxis
         style={{ marginTop: 5 }}
         data={data}
-        formatLabel={(value: number, index: number) => data[index]}
-        contentInset={{ left: 66, right: 14 }}
+        formatLabel={(value: number, index: number) => decimalPlaces ? data[index].toFixed(decimalPlaces) : data[index]}
+        contentInset={{ left: 66, right: 18 }}
         svg={{ fontSize: 14, fill: '#0ab' }}
       />
       <XAxis
