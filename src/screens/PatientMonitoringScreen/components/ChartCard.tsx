@@ -16,6 +16,7 @@ type ChartCardProps = {
   title: string,
   yMinGridValue: number,
   yMaxGridValue: number,
+  decimalPlaces?: number,
 }
 
 
@@ -24,6 +25,7 @@ function ChartCard({
   title,
   yMinGridValue,
   yMaxGridValue,
+  decimalPlaces,
 }: ChartCardProps): React.JSX.Element {
 
   return (
@@ -37,11 +39,12 @@ function ChartCard({
           exams={exams} 
           yMinGridValue={yMinGridValue}
           yMaxGridValue={yMaxGridValue}
+          decimalPlaces={decimalPlaces}
         />
       ) : (
         <Image
           source={chartPlaceholder}
-          style={{height: 100, aspectRatio: 1, alignSelf: 'center', opacity: 0.3}}
+          style={{marginVertical: 60, height: 100, aspectRatio: 1, alignSelf: 'center', opacity: 0.3}}
         />
       )}
     </View>
@@ -52,7 +55,8 @@ function Chart({
   exams, 
   yMinGridValue, 
   yMaxGridValue,
-}: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
+  decimalPlaces,
+}: { exams: Exam[], yMinGridValue: number, yMaxGridValue: number, decimalPlaces?: number }) {
 
   const data = exams.map(exam => exam.result);
   const labels = exams.map(exam => moment(exam.date).utc().format('DD-MM-YY'));
@@ -61,9 +65,10 @@ function Chart({
     <View style={{ marginHorizontal: 20 }}>
       <View style={{ height: 200, flexDirection: 'row' }}>
         <YAxis
+          style={{width: 40}}
           data={[yMinGridValue, yMaxGridValue]}
           contentInset={{ top: 20, bottom: 20 }}
-          formatLabel={(value: number, index: number) => value}
+          formatLabel={(value: number, index: number) => decimalPlaces ? value.toFixed(decimalPlaces) : value}
           svg={{
             fill: 'grey',
             fontSize: 14,
@@ -83,9 +88,16 @@ function Chart({
       </View>
       <XAxis
         style={{ marginTop: 5 }}
+        data={data}
+        formatLabel={(value: number, index: number) => data[index]}
+        contentInset={{ left: 66, right: 14 }}
+        svg={{ fontSize: 14, fill: '#0ab' }}
+      />
+      <XAxis
+        style={{ marginTop: 5 }}
         data={labels}
         formatLabel={(value: number, index: number) => labels[index]}
-        contentInset={{ left: 60, right: 28 }}
+        contentInset={{ left: 76, right: 28 }}
         svg={{ fontSize: 14, fill: 'grey' }}
       />
     </View>

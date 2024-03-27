@@ -108,19 +108,20 @@ function PatientMonitoringScreen(): React.JSX.Element {
               title='Ureia (mg/dL)'
               exams={exams.filter(exam => exam.type === 'ureia').slice(-4)}
               yMinGridValue={0.1}
-              yMaxGridValue={600}
+              yMaxGridValue={400} // 600
             />
             <ChartCard
               title='Densidade urinária'
               exams={exams.filter(exam => exam.type === 'densidade urinária').slice(-4)}
               yMinGridValue={1.001}
               yMaxGridValue={1.070}
+              decimalPlaces={3}
             />
             <ChartCard
               title='RPCU'
               exams={exams.filter(exam => exam.type === 'rpcu').slice(-4)}
               yMinGridValue={0}
-              yMaxGridValue={20}
+              yMaxGridValue={3} // 20
             />
             <ChartCard
               title='Cálcio ionizado (mmol/L)'

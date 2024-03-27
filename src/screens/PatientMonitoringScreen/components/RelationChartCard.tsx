@@ -59,7 +59,7 @@ function RelationChartCard({
       ) : (
         <Image
           source={chartPlaceholder}
-          style={{height: 100, aspectRatio: 1, alignSelf: 'center', opacity: 0.3}}
+          style={{marginVertical: 60, height: 100, aspectRatio: 1, alignSelf: 'center', opacity: 0.3}}
         />
       )}
     </View>
@@ -90,6 +90,7 @@ function Chart({
     <View style={{ marginHorizontal: 20 }}>
       <View style={{ height: 200, flexDirection: 'row' }}>
         <YAxis
+          style={{width: 40}}
           data={[yMinGridValue, yMaxGridValue]}
           contentInset={{ top: 20, bottom: 20 }}
           formatLabel={(value: number, index: number) => value}
@@ -113,17 +114,17 @@ function Chart({
       <XAxis
         style={{ marginTop: 5 }}
         data={labels}
-        formatLabel={(value: number, index: number) => labels[index]}
-        contentInset={{ left: 60, right: 28 }}
-        svg={{ fontSize: 14, fill: 'grey' }}
+        formatLabel={(value: number, index: number) => (
+            data[0].data[index] / data[1].data[index]).toFixed(2)}
+        contentInset={{ left: 66, right: 14 }}
+        svg={{ fontSize: 14, fill: 'darkgreen' }}
       />
       <XAxis
         style={{ marginTop: 5 }}
         data={labels}
-        formatLabel={(value: number, index: number) => (
-            data[0].data[index] / data[1].data[index]).toFixed(2)}
-        contentInset={{ left: 60, right: 28 }}
-        svg={{ fontSize: 14, fill: 'darkgreen' }}
+        formatLabel={(value: number, index: number) => labels[index]}
+        contentInset={{ left: 76, right: 28 }}
+        svg={{ fontSize: 14, fill: 'grey' }}
       />
     </View>
   );
