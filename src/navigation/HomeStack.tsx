@@ -63,17 +63,17 @@ export default function HomeStack() {
       <Stack.Screen
         name={'PatientSearchScreen'}
         component={PatientSearchScreen}
-        options={{title: 'Monitoramento DRC'}}
+        options={{title: 'UriMonitor'}}
       />
       <Stack.Screen
         name={'CreateProgramScreen'}
         component={CreateProgramScreen}
-        options={{title: 'Monitoramento DRC'}}
+        options={{title: 'UriMonitor'}}
       />
       <Stack.Screen
         name={'PatientMonitoringScreen'}
         component={PatientMonitoringScreen}
-        options={{title: 'Monitoramento DRC'}}
+        options={{title: 'UriMonitor'}}
       />
       <Stack.Screen
         name={'NotificationsScreen'}
