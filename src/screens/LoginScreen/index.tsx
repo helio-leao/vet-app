@@ -40,7 +40,7 @@ function LoginScreen(): React.JSX.Element {
     <View style={styles.screenContainer}>
 
       <Text style={styles.title}>
-        Acompanhamento DCVet
+        UriMonitor
       </Text>
 
       {/* MID SECTION */}
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     color: '#0aa',
+    alignSelf: 'center',
   },
   inputListContainer: {
     gap: 16,
