@@ -63,7 +63,7 @@ function CardContent({patient}: {patient: Patient}) {
 
       <View style={{flex: 1}}>
 
-        <Text style={[styles.text, {fontSize: 24, fontWeight: '800'}]}>
+        <Text style={[styles.text, {fontSize: 24, fontWeight: '800', textTransform: 'capitalize'}]}>
           {patient.name}
         </Text>
         <Text style={{fontSize: 12, color: '#0aa'}}>
@@ -72,7 +72,7 @@ function CardContent({patient}: {patient: Patient}) {
         <Text style={styles.text}>
           {patient.healthDescription}
         </Text>
-        <Text style={styles.text}>
+        <Text style={[styles.text, {textTransform: 'capitalize'}]}>
           Tutor(a): {patient.tutorName}
         </Text>
 
