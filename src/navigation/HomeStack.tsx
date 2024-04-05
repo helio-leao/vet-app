@@ -3,11 +3,12 @@ import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-na
 import PatientSearchScreen from '../screens/PatientSearchScreen';
 import CreateProgramScreen from '../screens/CreateProgramScreen';
 import { RouteProp, useNavigation } from '@react-navigation/native';
-import Octicons from 'react-native-vector-icons/Octicons';
+// import Octicons from 'react-native-vector-icons/Octicons';
 import PatientMonitoringScreen from '../screens/PatientMonitoringScreen';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NotificationsContext } from '../contexts/NotificationsProvider';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import bellIcon from '../assets/icons/bell.png';
 
 
 export type StackParamList = {
@@ -46,7 +47,11 @@ export default function HomeStack() {
               style={styles.button}
               onPress={() => navigation.navigate('NotificationsScreen')}
             >
-              <Octicons name="bell-fill" size={26} color="#fff" />
+              {/* <Octicons name="bell-fill" size={26} color="#fff" /> */}
+              <Image
+                source={bellIcon}
+                style={{height: 26, width: 26, tintColor: '#fff'}}
+              />
               {unreadNotificationsCount > 0 && (
                 <View style={styles.notificationsCountContainer}>
                   <Text style={{color: '#fff'}}>

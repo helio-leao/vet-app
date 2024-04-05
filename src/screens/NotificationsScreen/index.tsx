@@ -5,10 +5,11 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import axios from 'axios';
 import ContainerMessage from '../../components/ContainerMessage';
 import moment from 'moment';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+// import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import { Notification } from '../../types';
 import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
+import exclamationIcon from '../../assets/icons/exclamation.png';
 
 
 function NotificationsScreen() {
@@ -78,7 +79,7 @@ function NotificationsScreen() {
             <View style={{flex: 1}}>
 
               <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={[styles.text, {fontSize: 24, fontWeight: '600'}]}>
+                <Text style={[styles.text, {fontSize: 24, fontWeight: '600', textTransform: 'capitalize'}]}>
                   {notification.exam.patient.name}
                 </Text>
                 <Text style={{fontSize: 12, color: '#0aa'}}>
@@ -91,7 +92,11 @@ function NotificationsScreen() {
               </Text>
 
               <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
-                <FontAwesome name="exclamation-circle" size={24} color={notification.status === 'READ' ? '#666' : 'red'} />
+                <Image
+                  source={exclamationIcon}
+                  style={{height: 22, width: 22, tintColor: notification.status === 'READ' ? '#666' : 'red'}}
+                />
+                {/* <FontAwesome name="exclamation-circle" size={24} color={notification.status === 'READ' ? '#666' : 'red'} /> */}
                 <Text style={[styles.text, {flex: 1}]}>
                   {notification.message}
                 </Text>
