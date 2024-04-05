@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   FlatList,
   Alert,
+  Image,
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+// import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '../../navigation/HomeStack';
 import PatientCard from '../../components/PatientCard';
@@ -17,6 +18,7 @@ import axios from 'axios';
 import { Patient } from '../../types';
 import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
 import ContainerMessage from '../../components/ContainerMessage';
+import findIcon from '../../assets/icons/find.png';
 
 
 function PatientSearchScreen(): React.JSX.Element {
@@ -62,11 +64,11 @@ function PatientSearchScreen(): React.JSX.Element {
           placeholderTextColor={'#aaa'}
         />
         <TouchableOpacity style={{position: 'absolute', top: 8, right: 8}}>
-          <FontAwesome
-            name="search"
-            size={24}
-            color='#0aa'
+          <Image
+            source={findIcon}
+            style={{height: 24, width: 24, tintColor: '#0aa'}}
           />
+          {/* <FontAwesome name="search" size={24} color='#0aa' /> */}
         </TouchableOpacity>
       </View>
 
