@@ -76,7 +76,7 @@ function PatientSearchScreen(): React.JSX.Element {
           <ContainerLoadingIndicator />
         ) : (
           <FlatList
-            contentContainerStyle={{flex: 1, padding: 10, gap: 10}}
+            contentContainerStyle={{padding: 10, gap: 10}}
             data={patients}
             renderItem={({item: patient}) => (
               <PatientCard
@@ -98,7 +98,8 @@ function PatientSearchScreen(): React.JSX.Element {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    padding: 16,
+    paddingTop: 16,
+    paddingHorizontal: 16,
   },
   textInput: {
     borderColor: '#666',
@@ -110,10 +111,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   pacientListContainer: {
-    marginTop: 130,
+    marginTop: 20,
     flex: 1,
     backgroundColor: '#ddd',
-    borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius:10,
   },
   pacientContainer: {
     backgroundColor: '#fff',
