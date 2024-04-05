@@ -10,6 +10,8 @@ import { LineChart, YAxis, Grid, XAxis } from 'react-native-svg-charts';
 import { Exam } from '../../../types';
 import moment from 'moment';
 
+// todo: verify if set 1 and 2 items dates are equals
+
 
 type RelationChartCardProps = {
   set1: Exam[],
@@ -74,7 +76,7 @@ function Chart({
 }: { set1: Exam[], set2: Exam[], yMinGridValue: number, yMaxGridValue: number }) {
 
   const labels = set1.map(exam => moment(exam.date).utc().format('DD-MM-YY'));
-  const data = [
+  const dataList = [
     {
         data: set1.map(exam => exam.result),
         svg: { stroke: '#0ab' },
@@ -104,7 +106,7 @@ function Chart({
           style={{ flex: 1, marginLeft: 16 }}
           gridMin={yMinGridValue}
           gridMax={yMaxGridValue}
-          data={data}
+          data={dataList}
           svg={{ strokeWidth: 2 }}
           contentInset={{ top: 20, bottom: 20 }}
         >
@@ -114,8 +116,16 @@ function Chart({
       <XAxis
         style={{ marginTop: 5 }}
         data={labels}
-        formatLabel={(value: number, index: number) => (
-            data[0].data[index] / data[1].data[index]).toFixed(2)}
+        formatLabel={(_value: number, i: number) => {
+          const set1ItemResult = set1?.[i]?.result;
+          const set2ItemResult = set2?.[i]?.result;
+          
+          if (set1ItemResult && set2ItemResult) {
+            return (set1ItemResult / set2ItemResult).toFixed(2);
+          } else {
+            return set1ItemResult ?? set2ItemResult ?? undefined;
+          }
+        }}
         contentInset={{ left: 66, right: 14 }}
         svg={{ fontSize: 14, fill: 'darkgreen' }}
       />
