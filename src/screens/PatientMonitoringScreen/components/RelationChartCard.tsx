@@ -51,7 +51,7 @@ function RelationChartCard({
         </Text>
       </Text>
 
-      {set1.length > 1 ? (
+      {set1.length > 0 || set2.length > 0 ? (
         <Chart
           set1={set1} 
           set2={set2}

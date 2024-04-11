@@ -34,7 +34,7 @@ function ChartCard({
         {title}
       </Text>
 
-      {exams.length > 1 ? (
+      {exams.length > 0 ? (
         <Chart
           exams={exams} 
           yMinGridValue={yMinGridValue}
