@@ -63,7 +63,7 @@ function CardContent({patient}: {patient: Patient}) {
 
       <View style={{flex: 1}}>
 
-        <Text style={[styles.text, {fontSize: 24, fontWeight: '800', textTransform: 'capitalize'}]}>
+        <Text style={{fontSize: 20, fontWeight: '700', textTransform: 'capitalize', color: '#0aa'}}>
           {patient.name}
         </Text>
         <Text style={{fontSize: 12, color: '#0aa'}}>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#666',
   },
 });

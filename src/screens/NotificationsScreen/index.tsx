@@ -79,10 +79,10 @@ function NotificationsScreen() {
             <View style={{flex: 1}}>
 
               <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={[styles.text, {fontSize: 24, fontWeight: '600', textTransform: 'capitalize'}]}>
+                <Text style={{fontSize: 20, fontWeight: '700', textTransform: 'capitalize', color: '#0aa'}}>
                   {notification.exam.patient.name}
                 </Text>
-                <Text style={{fontSize: 12, color: '#0aa'}}>
+                <Text style={{fontSize: 12, color: '#666'}}>
                   {moment(notification.exam.date).utc().format('DD.MM.YYYY')}
                 </Text>
               </View>
