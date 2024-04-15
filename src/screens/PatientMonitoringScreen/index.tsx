@@ -18,6 +18,9 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicator';
 import ContainerMessage from '../../components/ContainerMessage';
 import RelationChartCard from './components/RelationChartCard';
+import DocumentPicker from 'react-native-document-picker';
+
+// todo: reload exams list after uploading pdf file
 
 
 function PatientMonitoringScreen(): React.JSX.Element {
@@ -52,6 +55,35 @@ function PatientMonitoringScreen(): React.JSX.Element {
     }
     loadData();
   }, []);
+
+
+  async function pickFile() {
+    try {
+      const selectedFile = await DocumentPicker.pickSingle({
+        type: [DocumentPicker.types.pdf],
+      });
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('patient', route.params.id);
+
+      try {
+        const response = await axios.post(`${API_URL}/exams/upload`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        Alert.alert('Atenção', 'Upload dos exames concluído');
+      } catch (err) {
+        console.error('Upload failed:', err);
+        // Handle upload errors (e.g., network issues, server errors)
+      }
+    } catch (err) {
+      // Handle errors (e.g., user cancellation, permission issues)
+      console.error(err);
+    }
+  };
 
 
   if(isLoading) {
@@ -169,14 +201,19 @@ function PatientMonitoringScreen(): React.JSX.Element {
           {/* END CHARTS */}
 
           {/* BUTTONS */}
-          <View style={{alignSelf: 'center', marginTop: 10, gap: 10}}>
-            <TouchableOpacity style={{backgroundColor: '#0ab', paddingVertical: 20, paddingHorizontal: 40, borderRadius: 6}}>
-              <Text style={[styles.text, {color: '#fff', fontWeight: '600', alignSelf: 'center'}]}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <TouchableOpacity
+              style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+              onPress={pickFile}
+            >
+              <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
                 Anexar Exames
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{borderWidth: 2, borderColor: '#0ab', paddingVertical: 20, paddingHorizontal: 40, borderRadius: 8}}>
-              <Text style={[styles.text, {color: '#0ab', fontWeight: '600', alignSelf: 'center'}]}>
+            <TouchableOpacity
+              style={{backgroundColor: '#0ab', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+            >
+              <Text style={[styles.text, {color: '#fff', fontWeight: '600'}]}>
                 Digitar Resultados
               </Text>
             </TouchableOpacity>
