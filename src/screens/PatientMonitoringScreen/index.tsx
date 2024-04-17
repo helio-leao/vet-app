@@ -28,6 +28,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
   const {accessToken} = useContext(AuthContext);
   const route = useRoute<PatientMonitoringScreenProp>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isReadingPdf, setIsReadingPdf] = useState(false);
   const [patient, setPatient] = useState<Patient>();
   const [exams, setExams] = useState<Exam[]>([]);
 
@@ -59,6 +60,8 @@ function PatientMonitoringScreen(): React.JSX.Element {
 
 
   async function loadExamDataFromFile() {
+    const {id: patientId} = route.params;
+
     try {
       const selectedFile = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf],
@@ -66,8 +69,10 @@ function PatientMonitoringScreen(): React.JSX.Element {
 
       const formData = new FormData();
       formData.append('file', selectedFile);
-      formData.append('patient', route.params.id);
+      formData.append('patient', patientId);
 
+      setIsReadingPdf(true);
+      
       try {
         const {data} = await axios.post(`${API_URL}/exams/upload`, formData, {
           headers: {
@@ -79,14 +84,21 @@ function PatientMonitoringScreen(): React.JSX.Element {
           return Alert.alert('Atenção', 'Nenhum exame incluído');
         }
 
+        // updates charts
+        const examsRequest = await axios.get(`${API_URL}/patients/${patientId}/exams`);
+        setExams(examsRequest.data);
+
         // message showing added exams to user
         const message = 'Data: ' + moment(data.newExams[0].date).utc().format('DD.MM.YYYY') +
           '\n\n' + data.newExams.map((exam: Exam) => `${exam.type}: ${exam.result}`).join('\n');
-
+        
+        setIsReadingPdf(false);        
         Alert.alert('Exames adicionados', message);
       } catch (err) {
         // Handle upload errors (e.g., network issues, server errors)
-        console.error('Upload failed:', err);
+        Alert.alert('Atenção', 'Falha na operação');
+      } finally {
+        setIsReadingPdf(false);
       }
     } catch (err) {
       // Handle errors (e.g., user cancellation, permission issues)
@@ -212,15 +224,20 @@ function PatientMonitoringScreen(): React.JSX.Element {
           {/* BUTTONS */}
           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
             <TouchableOpacity
-              style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+              style={{borderWidth: 2, borderColor: '#0ab', height: 50, width: 150, borderRadius: 8, justifyContent: 'center', alignItems: 'center'}}
               onPress={loadExamDataFromFile}
+              disabled={isReadingPdf}
             >
-              <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
-                Anexar Exames
-              </Text>
+              {isReadingPdf ? (
+                <ContainerLoadingIndicator size={'small'} />
+              ) : (
+                <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
+                  Anexar Exames
+                </Text>
+              )}
             </TouchableOpacity>
             <TouchableOpacity
-              style={{backgroundColor: '#0ab', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
+              style={{backgroundColor: '#0ab', height: 50, width: 160, borderRadius: 8, justifyContent: 'center', alignItems: 'center'}}
             >
               <Text style={[styles.text, {color: '#fff', fontWeight: '600'}]}>
                 Digitar Resultados
