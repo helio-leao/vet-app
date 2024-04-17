@@ -19,6 +19,7 @@ import ContainerLoadingIndicator from '../../components/ContainerLoadingIndicato
 import ContainerMessage from '../../components/ContainerMessage';
 import RelationChartCard from './components/RelationChartCard';
 import DocumentPicker from 'react-native-document-picker';
+import moment from 'moment';
 
 // todo: reload exams list after uploading pdf file
 
@@ -57,7 +58,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
   }, []);
 
 
-  async function pickFile() {
+  async function loadExamDataFromFile() {
     try {
       const selectedFile = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf],
@@ -68,22 +69,30 @@ function PatientMonitoringScreen(): React.JSX.Element {
       formData.append('patient', route.params.id);
 
       try {
-        const response = await axios.post(`${API_URL}/exams/upload`, formData, {
+        const {data} = await axios.post(`${API_URL}/exams/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
 
-        Alert.alert('Atenção', 'Upload dos exames concluído');
+        if(data.newExams.length === 0) {
+          return Alert.alert('Atenção', 'Nenhum exame incluído');
+        }
+
+        // message showing added exams to user
+        const message = 'Data: ' + moment(data.newExams[0].date).utc().format('DD.MM.YYYY') +
+          '\n\n' + data.newExams.map((exam: Exam) => `${exam.type}: ${exam.result}`).join('\n');
+
+        Alert.alert('Exames adicionados', message);
       } catch (err) {
-        console.error('Upload failed:', err);
         // Handle upload errors (e.g., network issues, server errors)
+        console.error('Upload failed:', err);
       }
     } catch (err) {
       // Handle errors (e.g., user cancellation, permission issues)
       console.error(err);
     }
-  };
+  }
 
 
   if(isLoading) {
@@ -204,7 +213,7 @@ function PatientMonitoringScreen(): React.JSX.Element {
           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
             <TouchableOpacity
               style={{borderWidth: 2, borderColor: '#0ab',paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8}}
-              onPress={pickFile}
+              onPress={loadExamDataFromFile}
             >
               <Text style={[styles.text, {color: '#0ab', fontWeight: '600'}]}>
                 Anexar Exames
